@@ -6,6 +6,5 @@
         public bool IsDone { get; set; }
         public Diagnosis Diagnosis { get; set; }
         public PrescriptionType PrescriptionType { get; set; }
-
     }
 }
