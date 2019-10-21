@@ -1,23 +1,44 @@
-﻿using System;
-using Hospital.Core.Interfaces;
+﻿using Hospital.Core.Interfaces;
+using NLog;
 
 namespace Hospital.Services
 {
-    public class LoggerService : ILoggerService
+    public class LoggerService<T> : ILoggerService<T> 
+        where T:class
     {
+        private readonly Logger _logger;
+        public LoggerService()
+        {
+            _logger = LogManager.GetLogger(typeof(T).FullName);
+        }
+        public void Trace(string message)
+        {
+            _logger.Trace(message);
+        }
+
+        public void Debug(string message)
+        {
+            _logger.Debug(message);
+        }
+
         public void Info(string message)
         {
-            throw new NotImplementedException();
+            _logger.Info(message);
         }
 
-        public void Error(Exception exception, string message)
+        public void Warn(string message)
         {
-            throw new NotImplementedException();
+           _logger.Warn(message);
         }
 
-        public void Error(Exception exception, string message, params object[] args)
+        public void Error(string message)
         {
-            throw new NotImplementedException();
+           _logger.Error(message);
+        }
+
+        public void Fatal(string message)
+        {
+            _logger.Fatal(message);
         }
     }
 }

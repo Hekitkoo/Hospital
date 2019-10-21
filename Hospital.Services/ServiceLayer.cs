@@ -9,8 +9,7 @@ namespace Hospital.Services
         {
             builder.RegisterType<HomeService>().As<IHomeService>();
             builder.RegisterType<AdminService>().As<IAdminService>();
-            builder.RegisterType<LoggerService>().As<ILoggerService>();
+            builder.RegisterGeneric(typeof(LoggerService<>)).As(typeof(ILoggerService<>));
         }
-        
     }
 }
