@@ -3,40 +3,47 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <title>Hospital</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                </ul>
-            </div>
+    <header class="navbar navbar-light bg-light rounded  border-bottom">
+        <a class="navbar-brand" href="@Url.Action("Index","Home")">
+            <img src="/Content/logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
+            Hospital
+        </a>
+        @if (User.Identity.IsAuthenticated)
+        {
+            @Html.ActionLink("Log out", "LogOff", "Home", new { area = "", controller = "Home" }, new { @class = "btn" })
+        }
+        else
+        {
+            @Html.ActionLink("Login", "Login", "Home", null, new { @class = "btn" })
+        }
+    </header>
+    <main class="container">
+        <div class="row">
+            @if (User.Identity.IsAuthenticated)
+            {
+                @Html.Partial("~/Views/Shared/_Menu.cshtml")
+            }
+            @RenderBody()
         </div>
-    </div>
-    <div class="container body-content">
-        @RenderBody()
         <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
-    </div>
+    </main>
+    <footer class="justify-content-center mt-1 rounded">
+        <p class="text-center">
+            ©@DateTime.Now.Year Copyright: @Html.ActionLink("Sokurenko Nikita", "Contact", "Home")
+        </p>
+        <button onclick="backToTop()" id="myBtn" title="Go to top">Top</button>
+    </footer>
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/scripts")
     @RenderSection("scripts", required: false)
 </body>
 </html>

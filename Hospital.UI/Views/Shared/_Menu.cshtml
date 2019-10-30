@@ -1,0 +1,45 @@
+﻿<div class="col-12 order-lg-1 mt-1 col-lg-3 pl-0 pl-lg-1 pr-0">
+    <nav class=" navbar-light bg-light rounded">
+        <ul class="navbar-nav text-center">
+            <li class="nav-item">
+                @Html.ActionLink("Home", "Index", "Home", new { area = "", controller = "Home" }, new { @class = "nav-link" })
+            </li>
+            @if (User.IsInRole("patient"))
+            {
+                <li class="nav-item">
+                    @Html.ActionLink("My Card", "View", "Patient", null, new { @class = "nav-link" })
+                </li>
+            }
+            @if (User.IsInRole("doctor"))
+            {
+                <li class="nav-item">
+                    @Html.ActionLink("Patients", "Index", "Patient", null, new { @class = "nav-link" })
+                </li>
+                <li class="nav-item">
+                    @Html.ActionLink("Procedures", "Procedures", "Doctor", null, new { @class = "nav-link" })
+                </li>
+            }
+            @if (User.IsInRole("nurse"))
+            {
+                <li class="nav-item">
+                    @Html.ActionLink("Procedures", "Procedures", "Nurse", null, new { @class = "nav-link" })
+                </li>
+            }
+            @if (User.IsInRole("admin"))
+            {
+                <li class="nav-item">
+                    @Html.ActionLink("Admin panel", "Index", new { area = "Admin", controller = "Home" }, new { @class = "nav-link" })
+                </li>
+                <li class="nav-item">
+                    @Html.ActionLink("Patients", "Index", new { area = "Admin", controller = "Patient" }, new { @class = "nav-link" })
+                </li>
+                <li class="nav-item">
+                    @Html.ActionLink("Doctors", "Index", new { area = "Admin", controller = "Doctor" }, new { @class = "nav-link" })
+                </li>
+            }
+            <li class="nav-item">
+                @Html.ActionLink("Contact", "Contact", "Home", new { area = "", controller = "Home" }, new { @class = "nav-link" })
+            </li>
+        </ul>
+    </nav>
+</div>

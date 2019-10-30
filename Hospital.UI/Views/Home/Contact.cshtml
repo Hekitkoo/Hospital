@@ -1,17 +1,23 @@
-﻿@{
-    ViewBag.Title = "Contact";
+﻿@if (User.Identity.IsAuthenticated)
+{
+    <div class="text-center col-12 col-lg-9 order-lg-0 bg-light mt-1">
+        <address>
+            <strong>Phone:</strong><abbr title="Phone">+380930000000</abbr>
+        </address>
+        <address>
+            <strong>Email:</strong> <a href="mailto:admin@hospital.com.ua">admin@hospital.com.ua</a>
+        </address>
+    </div>
 }
-<h2>@ViewBag.Title.</h2>
-<h3>@ViewBag.Message</h3>
+else
+{
+    <div class="text-center col-12 order-lg-0 bg-light mt-1">
+        <address>
+            <strong>Phone:</strong><abbr title="Phone">+380930000000</abbr>
+        </address>
+        <address>
+            <strong>Email:</strong> <a href="mailto:admin@hospital.com.ua">admin@hospital.com.ua</a>
+        </address>
+    </div>
+}
 
-<address>
-    One Microsoft Way<br />
-    Redmond, WA 98052-6399<br />
-    <abbr title="Phone">P:</abbr>
-    425.555.0100
-</address>
-
-<address>
-    <strong>Support:</strong>   <a href="mailto:Support@example.com">Support@example.com</a><br />
-    <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
-</address>

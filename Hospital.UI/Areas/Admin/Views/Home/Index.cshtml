@@ -1,0 +1,38 @@
+﻿<div class="col-12 col-lg-9 order-lg-0 mt-1 bg-light rounded">
+    @if (User.IsInRole("admin"))
+    {
+        <h2 class="text-center">Hospital administrator panel</h2>
+        <p class="text-center">
+            Welcome @User.Identity.Name. You can manage:
+        </p>
+        <ul class="navbar">
+            <li class="nav-link">
+                @Html.ActionLink("Patients", "Index", "Patient")
+            </li>
+            <li class="nav-link">
+                @Html.ActionLink("Doctors", "Index", "Doctor")
+            </li>
+            <li class="nav-link">
+                @Html.ActionLink("Nurses", "Index", "Nurse")
+            </li>
+            <li class="nav-link">
+                @Html.ActionLink("Doctors categories", "Index", "Category")
+            </li>
+        </ul>
+    }
+    else
+    {
+        <h2 class="text-center">
+            Access denied. You must
+            @if (User.Identity.IsAuthenticated)
+            {
+                <span>be loged as a admin</span>
+            }
+            else
+            {
+                @Html.RouteLink("login", "Default", new { action = "Login", controller = "Home" })
+            }
+        </h2>
+    }
+</div>
+
