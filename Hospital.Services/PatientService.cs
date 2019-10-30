@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Threading.Tasks;
 using Hospital.Core.Interfaces;
 using Hospital.Core.Models;
 using Hospital.DAL;
@@ -10,23 +12,64 @@ namespace Hospital.Services
     public class PatientService : IPatientService
     {
         private readonly HospitalContext _context;
+        private readonly UserService _userService;
+        private readonly IDoctorService _doctorService;
+        private readonly ILoggerService<PatientService> _loggerService;
+        private readonly RoleService _roleService;
+        private static string roleName = "patient";
 
-        public PatientService(HospitalContext context)
+        public PatientService(UserService userService, ILoggerService<PatientService> loggerService, HospitalContext context, IDoctorService doctorService, RoleService roleService)
         {
+            _userService = userService;
+            _loggerService = loggerService;
             _context = context;
+            _doctorService = doctorService;
+            _roleService = roleService;
         }
-        public void Add(Patient patient)
+
+        public async Task Add(Patient patient)
         {
-            _context.Patients.Add(patient);
-            _context.SaveChanges();
+            try
+            {
+                patient.Doctor = _doctorService.FindById(patient.DoctorId);
+                patient.Roles.Add(await _roleService.FindByNameAsync(roleName));
+                await _userService.CreateAsync(patient, patient.PasswordHash);
+            }
+            catch (Exception e)
+            {
+                _loggerService.Error($"{e}");
+                throw;
+            }
+        }
+
+        public bool Unique(Patient patient)
+        {
+            var userByName = _userService.FindByNameAsync(patient.UserName).Result;
+            var userByEmail = _userService.FindByEmailAsync(patient.Email).Result;
+
+            if (userByName != null || userByEmail != null)
+            {
+                return false;
+            }
+
+            return true;
         }
 
         public void Delete(Patient patient)
         {
-            _context.Patients.Remove(patient);
+            try
+            {
+                _userService.DeleteAsync(patient);
+            }
+            catch (Exception e)
+            {
+                _loggerService.Error($"{e}");
+                throw;
+            }
+            
         }
 
-        public User FindByName(string name)
+        public Patient FindByName(string name)
         {
             return _context.Patients.FirstOrDefault(p => p.UserName == name);
         }

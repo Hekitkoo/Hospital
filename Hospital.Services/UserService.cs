@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Web.UI;
+using System.Threading.Tasks;
 using Hospital.Core.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
@@ -8,7 +8,7 @@ namespace Hospital.Services
 {
     public class UserService : UserManager<User, int>
     {
-        public UserService(IUserStore<User, int> userStore)
+        public UserService(IUserStore<User, int> userStore, IdentityFactoryOptions<UserService> options)
         : base(userStore)
         {
             UserValidator = new UserValidator<User,int>(this)
@@ -21,16 +21,33 @@ namespace Hospital.Services
             PasswordValidator = new PasswordValidator
             {
                 RequiredLength = 6,
-                RequireNonLetterOrDigit = true,
+                //RequireNonLetterOrDigit = true,
                 RequireDigit = true,
                 RequireLowercase = true,
-                RequireUppercase = true,
+                //RequireUppercase = true,
             };
 
             // Configure user lockout defaults
-            UserLockoutEnabledByDefault = true;
-            DefaultAccountLockoutTimeSpan = TimeSpan.FromMinutes(5);
-            MaxFailedAccessAttemptsBeforeLockout = 5;
+            //UserLockoutEnabledByDefault = true;
+            //DefaultAccountLockoutTimeSpan = TimeSpan.FromMinutes(5);
+            //MaxFailedAccessAttemptsBeforeLockout = 5;
+
+            var dataProtectionProvider = options.DataProtectionProvider;
+            if (dataProtectionProvider != null)
+            {
+                UserTokenProvider =
+                    new DataProtectorTokenProvider<User,int>(dataProtectionProvider.Create("ASP.NET Identity"));
+            }
         }
+
+        //protected override async Task<bool> VerifyPasswordAsync(IUserPasswordStore<User, int> store, User user, string password)
+        //{
+        //    var psUser = await store.FindByIdAsync(user.Id);
+        //    if (psUser != null)
+        //    {
+        //        return psUser.PasswordHash.Equals(password);
+        //    }
+        //    return false;
+        //}
     }
 }

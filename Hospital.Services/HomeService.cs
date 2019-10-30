@@ -1,30 +1,36 @@
 ﻿using System.Threading.Tasks;
 using Hospital.Core.Interfaces;
-using Hospital.Core.Models;
-using Hospital.DAL;
-using Microsoft.AspNet.Identity;
+using Microsoft.Owin.Security;
 
 namespace Hospital.Services
 {
-    public class HomeService: IHomeService
+    public class HomeService : IHomeService
     {
-        private IdentityService _identityService;
-        private readonly HospitalContext _context;
         private readonly UserService _userService;
-        private readonly RoleService _roleService;
+        private readonly IAuthenticationManager _authenticationManager;
+        private readonly SigninService _signInManager;
 
-        public HomeService (HospitalContext context, UserService userService, RoleService roleService)
+        public HomeService(IAuthenticationManager authenticationManager, UserService userService, SigninService signInManager)
         {
-            _context = context;
             _userService = userService;
-            _roleService = roleService;
-            _identityService = new IdentityService(_context, _userService, _roleService);
-
+            _signInManager = signInManager;
+            _authenticationManager = authenticationManager;
+        }
+        public async Task<bool> LogIn(string username, string password, bool rememberMe)
+        {
+           
+            var user = await _userService.FindAsync(username, password);
+            if (user == null)
+            {
+                return false;
+            }
+            await _signInManager.SignInAsync(user, true, rememberMe);
+            return true;
         }
 
-        public async Task Test()
+        public void SignOut(string authType)
         {
-            await _identityService.InitRolesAndUsers();
+            _authenticationManager.SignOut(authType);
         }
     }
 }

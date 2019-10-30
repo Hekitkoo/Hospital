@@ -8,7 +8,6 @@ namespace Hospital.Services
         public RoleService(IRoleStore<Role, int> roleStore)
         : base(roleStore)
         {
-
         }
     }
 }

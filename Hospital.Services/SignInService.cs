@@ -5,9 +5,9 @@ using Microsoft.Owin.Security;
 
 namespace Hospital.Services
 {
-    public class SignInService : SignInManager<User,int>
+    public class SigninService :SignInManager<User,int>
     {
-        public SignInService(UserManager<User, int> userManager, IAuthenticationManager authenticationManager) : base(userManager, authenticationManager)
+        public SigninService(UserService userManager, IAuthenticationManager authenticationManager) : base(userManager, authenticationManager)
         {
         }
     }
