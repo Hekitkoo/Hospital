@@ -1,6 +1,6 @@
 ﻿namespace Hospital.Core.Interfaces
 {
-    public interface IAdminService
+    public interface IDoctorService
     {
         
     }
