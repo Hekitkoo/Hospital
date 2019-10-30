@@ -4,7 +4,7 @@
     {
         public string Description { get; set; }
         public bool IsDone { get; set; }
-        public Diagnosis Diagnosis { get; set; }
-        public PrescriptionType PrescriptionType { get; set; }
+        public virtual Diagnosis Diagnosis { get; set; }
+        public virtual PrescriptionType PrescriptionType { get; set; }
     }
 }

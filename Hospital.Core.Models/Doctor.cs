@@ -4,7 +4,12 @@ namespace Hospital.Core.Models
 {
     public class Doctor : User
     {
-        public Specialty Specialty { get; set; }
-        public ICollection<Patient> Patients { get; set; }
+        public virtual Specialty Specialty { get; set; }
+        public virtual ICollection<Patient> Patients { get; set; }
+
+        public Doctor()
+        {
+            Patients = new List<Patient>();
+        }
     }
 }

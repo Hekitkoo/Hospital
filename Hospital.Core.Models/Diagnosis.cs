@@ -6,7 +6,12 @@ namespace Hospital.Core.Models
     {
         public bool Cured { get; set; }
         public string DefinitiveDiagnosis { get; set; }
-        public PatientCard PatientCard { get; set; }
-        public ICollection<Prescription> Prescriptions { get; set; }
+        public virtual PatientCard PatientCard { get; set; }
+        public virtual ICollection<Prescription> Prescriptions { get; set; }
+
+        public Diagnosis()
+        {
+            Prescriptions = new List<Prescription>();
+        }
     }
 }

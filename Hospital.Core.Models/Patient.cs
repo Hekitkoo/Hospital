@@ -2,7 +2,8 @@
 {
     public class Patient : User
     {
-        public Doctor Doctor { get; set; }
-        public PatientCard PatientCard { get; set; }
+        public virtual Doctor Doctor { get; set; }
+        public int? DoctorId { get; set; }
+        public virtual PatientCard PatientCard { get; set; }
     }
 }

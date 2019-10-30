@@ -4,7 +4,12 @@ namespace Hospital.Core.Models
 {
     public class PatientCard : BaseEntity
     {
-        public Patient Patient { get; set; }
-        public ICollection<Diagnosis> Diagnoses { get; set; }
+        public virtual Patient Patient { get; set; }
+        public virtual ICollection<Diagnosis> Diagnoses { get; set; }
+
+        public PatientCard()
+        {
+            Diagnoses = new List<Diagnosis>();
+        }
     }
 }
