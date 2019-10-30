@@ -27,11 +27,6 @@ namespace Hospital.Services
                 //RequireUppercase = true,
             };
 
-            // Configure user lockout defaults
-            //UserLockoutEnabledByDefault = true;
-            //DefaultAccountLockoutTimeSpan = TimeSpan.FromMinutes(5);
-            //MaxFailedAccessAttemptsBeforeLockout = 5;
-
             var dataProtectionProvider = options.DataProtectionProvider;
             if (dataProtectionProvider != null)
             {
@@ -40,14 +35,14 @@ namespace Hospital.Services
             }
         }
 
-        //protected override async Task<bool> VerifyPasswordAsync(IUserPasswordStore<User, int> store, User user, string password)
-        //{
-        //    var psUser = await store.FindByIdAsync(user.Id);
-        //    if (psUser != null)
-        //    {
-        //        return psUser.PasswordHash.Equals(password);
-        //    }
-        //    return false;
-        //}
+        protected override async Task<bool> VerifyPasswordAsync(IUserPasswordStore<User, int> store, User user, string password)
+        {
+            var psUser = await store.FindByIdAsync(user.Id);
+            if (psUser != null)
+            {
+                return psUser.PasswordHash.Equals(password);
+            }
+            return false;
+        }
     }
 }
