@@ -170,6 +170,7 @@ namespace Hospital.DAL
             if (_context != null)
             {
                 _context.Dispose();
+                _context = null;
             }
             
         }

@@ -23,16 +23,15 @@ namespace Hospital.DAL
                 typeDoctorsList.Add(new Specialty { Name = speciality });
             }
 
-            //typeDoctorsList.ForEach(s => context.Specialties.Add(s));
-            //context.SaveChanges();
+            typeDoctorsList.ForEach(s => context.Specialties.Add(s));
+            context.SaveChanges();
 
             #endregion
             #region Create users and roles
             var uniquePassword = "admin1";
-            //var password = System.Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes(uniquePassword));
 
 
-               
+
 
             var doctorRole = new Role {Name = "doctor"};
             var admin = new User {Roles = new List<Role> {new Role {Name = "admin"}}, Email = "admin@hospital.com.ua", UserName = "admin", FirstName = "Nikita", LastName = "Watashi", PasswordHash = uniquePassword };

@@ -3,36 +3,35 @@
 <div class="col-12 col-lg-9 order-lg-0 mt-1 bg-light rounded">
     @using (Html.BeginForm())
     {
-        @Html.HiddenFor(m => m.Id)
         <div class=" form-group col-md-10 ">
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
             @Html.LabelFor(m => m.UserName)
-            @Html.TextBoxFor(m => m.UserName, new { placeholder = @Html.DisplayNameFor(m => m.UserName), @class = "form-control text-center" })
+            @Html.EditorFor(m => m.UserName, new {htmlAttributes = new {placeholder = @Html.DisplayNameFor(m => m.UserName), @class = "form-control text-center" }})
             @Html.ValidationMessageFor(m => m.UserName, "", new { @class = "text-danger" })
         </div>
         <div class=" form-group col-md-10 ">
             @Html.LabelFor(m => m.Email)
-            @Html.TextBoxFor(m => m.Email, new { placeholder = @Html.DisplayNameFor(m => m.Email), @class = "form-control text-center" })
+            @Html.EditorFor(m => m.Email, new {htmlAttributes = new { placeholder = @Html.DisplayNameFor(m => m.Email), @class = "form-control text-center" }})
             @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
         </div>
         <div class=" form-group col-md-10 ">
             @Html.LabelFor(m => m.FirstName)
-            @Html.TextBoxFor(m => m.FirstName, new { placeholder = @Html.DisplayNameFor(m => m.FirstName), @class = "form-control text-center" })
+            @Html.EditorFor(m => m.FirstName, new {htmlAttributes = new { placeholder = @Html.DisplayNameFor(m => m.FirstName), @class = "form-control text-center" }})
             @Html.ValidationMessageFor(m => m.FirstName, "", new { @class = "text-danger" })
         </div>
         <div class=" form-group col-md-10 ">
             @Html.LabelFor(m => m.LastName)
-            @Html.TextBoxFor(m => m.LastName, new { placeholder = @Html.DisplayNameFor(m => m.LastName), @class = "form-control text-center" })
+            @Html.EditorFor(m => m.LastName, new {htmlAttributes = new { placeholder = @Html.DisplayNameFor(m => m.LastName), @class = "form-control text-center"} })
             @Html.ValidationMessageFor(m => m.LastName, "", new { @class = "text-danger" })
         </div>
         <div class=" form-group col-md-10 ">
             @Html.LabelFor(m => m.Birthday)
-            @Html.TextBoxFor(m => m.Birthday, "{0:dd/MM/yy}", new { placeholder = @Html.DisplayNameFor(m => m.Birthday), @class = "form-control text-center" })
+            @Html.EditorFor(m => m.Birthday, "{0:dd/MM/yy}", new {htmlAttributes = new { placeholder = @Html.DisplayNameFor(m => m.Birthday), @class = "form-control text-center" }})
         </div>
 
         <div class=" form-group col-md-10 ">
             @Html.LabelFor(m => m.PasswordHash)
-            @Html.TextBoxFor(m => m.PasswordHash, new { placeholder = @Html.DisplayNameFor(m => m.PasswordHash), @class = "form-control text-center" })
+            @Html.EditorFor(m => m.PasswordHash, new {htmlAttributes = new { placeholder = @Html.DisplayNameFor(m => m.PasswordHash), @class = "form-control text-center" }})
             @Html.ValidationMessageFor(m => m.PasswordHash, "", new { @class = "text-danger" })
         </div>
         <div class=" form-group col-md-10 ">

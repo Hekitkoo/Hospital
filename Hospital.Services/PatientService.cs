@@ -33,7 +33,7 @@ namespace Hospital.Services
             {
                 patient.Doctor = _doctorService.FindById(patient.DoctorId);
                 patient.Roles.Add(await _roleService.FindByNameAsync(RoleName));
-                await _userService.CreateAsync(patient, patient.PasswordHash);
+                await _userService.CreateAsync(patient);
             }
             catch (Exception e)
             {

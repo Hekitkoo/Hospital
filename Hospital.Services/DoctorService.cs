@@ -29,8 +29,9 @@ namespace Hospital.Services
             try
             {
                 doctor.Specialty = FindSpeciality(doctor.SpecialityId);
-                doctor.Roles.Add(await _roleService.FindByNameAsync(RoleName));
-                await _userService.CreateAsync(doctor, doctor.PasswordHash);
+                var role = await _roleService.FindByNameAsync(RoleName);
+                doctor.Roles.Add(role);
+                await _userService.CreateAsync(doctor);
             }
             catch (Exception e)
             {
