@@ -18,7 +18,7 @@ namespace Hospital.DAL
 
         public HospitalContext() : base("HospitalContext")
         {
-            Configuration.LazyLoadingEnabled = false;
+            //Configuration.LazyLoadingEnabled = false;
             Database.SetInitializer(new HospitalInitializer());
         }
 

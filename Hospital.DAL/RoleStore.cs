@@ -1,50 +1,79 @@
-﻿using System.Data.Entity;
-using System.Linq;
+﻿using System;
+using System.Data.Entity;
 using System.Threading.Tasks;
 using Hospital.Core.Models;
 using Microsoft.AspNet.Identity;
 
 namespace Hospital.DAL
 {
-    public class RoleStore : IRoleStore<Role,int>
+    public class RoleStore : IRoleStore<Role, int>
     {
-        private readonly HospitalContext _context;
+        private HospitalContext _context;
+        // Flag: Has Dispose already been called?
+        private bool _disposed;
 
         public RoleStore(HospitalContext context)
         {
             _context = context;
         }
 
-        public Task CreateAsync(Role role)
+        public async Task CreateAsync(Role role)
         {
-            _context.Roles.Add(role);
-            return Task.FromResult(_context.SaveChangesAsync());
+            if (role == null)
+            {
+                throw new ArgumentNullException(nameof(role));
+            }
+            _context.Set<Role>().Add(role);
+            await _context.SaveChangesAsync();
         }
 
-        public Task UpdateAsync(Role role)
+        public async Task UpdateAsync(Role role)
         {
+            if (role == null)
+            {
+                throw new ArgumentNullException(nameof(role));
+            }
             _context.Entry(role).State = EntityState.Modified;
-            return Task.FromResult(_context.SaveChangesAsync());
+            await _context.SaveChangesAsync();
         }
 
-        public Task DeleteAsync(Role role)
+        public async Task DeleteAsync(Role role)
         {
-            _context.Roles.Remove(role);
-            return Task.FromResult(_context.SaveChangesAsync());
+            if (role == null)
+            {
+                throw new ArgumentNullException(nameof(role));
+            }
+            _context.Set<Role>().Remove(role);
+            await _context.SaveChangesAsync();
         }
 
-        public Task<Role> FindByIdAsync(int roleId)
+        public async Task<Role> FindByIdAsync(int roleId)
         {
-            return Task.FromResult(_context.Roles.FirstOrDefault(u => u.Id == roleId));
+            return await _context.Set<Role>().FirstOrDefaultAsync(r => r.Id.Equals(roleId));
         }
 
-        public Task<Role> FindByNameAsync(string roleName)
+        public async Task<Role> FindByNameAsync(string roleName)
         {
-            return Task.FromResult(_context.Roles.FirstOrDefault(u => u.Name == roleName));
+            return await _context.Set<Role>().FirstOrDefaultAsync(r => r.Name.Equals(roleName, StringComparison.CurrentCultureIgnoreCase));
         }
         public void Dispose()
         {
-            throw new System.NotImplementedException();
+            // Dispose of unmanaged resources.
+            Dispose(true);
+            // Suppress finalization.
+            GC.SuppressFinalize(this);
+        }
+        protected virtual void Dispose(bool disposing)
+        {
+            if (_disposed)
+                return;
+
+            if (disposing)
+            {
+                _context.Dispose();
+            }
+            _context = null;
+            _disposed = true;
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Autofac;
 using Hospital.Core.Models;
+using Microsoft.AspNet.Identity;
 
 namespace Hospital.DAL
 {
@@ -8,8 +9,9 @@ namespace Hospital.DAL
         protected override void Load(ContainerBuilder builder)
         {
             builder.RegisterType<HospitalContext>().AsSelf().InstancePerRequest();
-            //builder.RegisterType<UserStore>().As<User>().InstancePerRequest();
-            //builder.RegisterType<RoleStore>().As<Role>().InstancePerRequest();
+            builder.RegisterType<UserStore>().As<IUserStore<User,int>>().InstancePerRequest();
+            builder.RegisterType<UserStore>().As<IUserPasswordStore<User, int>>().InstancePerRequest();
+            builder.RegisterType<RoleStore>().As<IRoleStore<Role,int>>().InstancePerRequest();
         }
     }
 }

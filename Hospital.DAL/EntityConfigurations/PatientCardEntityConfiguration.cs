@@ -1,4 +1,5 @@
-﻿using System.Data.Entity.ModelConfiguration;
+﻿using System;
+using System.Data.Entity.ModelConfiguration;
 using Hospital.Core.Models;
 
 namespace Hospital.DAL.EntityConfigurations
@@ -8,9 +9,9 @@ namespace Hospital.DAL.EntityConfigurations
         public PatientCardEntityConfiguration()
         {
             HasOptional(pt => pt.Patient)
-                .WithRequired(p=>p.PatientCard);
+                .WithOptionalDependent(p=>p.PatientCard);
             HasMany(pt => pt.Diagnoses)
-                .WithRequired(d => d.PatientCard);
+                .WithOptional(d => d.PatientCard);
         }
     }
 }

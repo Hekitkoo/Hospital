@@ -1,19 +1,14 @@
 ﻿using System.Collections.Generic;
 using System.Data.Entity;
-using System.Runtime.InteropServices;
 using Hospital.Core.Models;
-using Microsoft.AspNet.Identity;
 
 namespace Hospital.DAL
 {
 
-
-
-    public class HospitalInitializer : DropCreateDatabaseIfModelChanges<HospitalContext>
+    public class HospitalInitializer : DropCreateDatabaseAlways<HospitalContext>
     {
         protected override void Seed(HospitalContext context)
         {
-
             #region Create type list of doctors
 
             var specialities = new[]
@@ -28,45 +23,45 @@ namespace Hospital.DAL
                 typeDoctorsList.Add(new Specialty { Name = speciality });
             }
 
-            typeDoctorsList.ForEach(s => context.Specialties.Add(s));
-            context.SaveChanges();
+            //typeDoctorsList.ForEach(s => context.Specialties.Add(s));
+            //context.SaveChanges();
 
             #endregion
-
             #region Create users and roles
+            var uniquePassword = "admin1";
+            //var password = System.Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes(uniquePassword));
 
-            var admin = new User { Email = "admin@hospital.com.ua", UserName = "admin", FirstName = "Nikita", LastName = "Watashi" };
-            var nurse = new User { Email = "nurse@hospital.com.ua", UserName = "nurse", FirstName = "Nikita", LastName = "GaDono" };
-            var doctor = new Doctor { Email = "doctor@hospital.com.ua", UserName = "doctor", FirstName = "Nikita", LastName = "YōNiKokoromiru" };
-            var patient = new Patient { Email = "patient@gmail.com", UserName = "patient", FirstName = "Nikita", LastName = "KaMitekudasai" };
-            var adminRole = new Role { Name = "Admin" };
-            var doctorRole = new Role { Name = "Doctor" };
-            var patientRole = new Role { Name = "Patient" };
-            var nurseRole = new Role { Name = "Nurse" };
+
+               
+
+            var doctorRole = new Role {Name = "doctor"};
+            var admin = new User {Roles = new List<Role> {new Role {Name = "admin"}}, Email = "admin@hospital.com.ua", UserName = "admin", FirstName = "Nikita", LastName = "Watashi", PasswordHash = uniquePassword };
+            var nurse = new User { Roles = new List<Role> { new Role { Name = "nurse" } }, Email = "nurse@hospital.com.ua", UserName = "nurse", FirstName = "Nikita", LastName = "GaDono", PasswordHash = uniquePassword };
+            var doctor = new Doctor { Roles = new List<Role> { doctorRole }, Email = "doctor@hospital.com.ua", UserName = "doctor", FirstName = "Nikita", LastName = "YōNiKokoromiru", PasswordHash = uniquePassword };
+            var patientRole = new Role {Name = "patient"};
+
+            var patients = new List<Patient>
+            {
+                new Patient { PasswordHash = uniquePassword, Roles = new List<Role>{patientRole},Email = "patient@gmail.com", UserName = "patient", FirstName = "Nikita", LastName = "KaMitekudasai" },
+                new Patient { PasswordHash = uniquePassword, Roles = new List<Role>{patientRole},Email = "patient@gmail.com", UserName = "patient", FirstName = "Nikita", LastName = "A" },
+                new Patient { PasswordHash = uniquePassword, Roles = new List<Role>{patientRole},Email = "patient@gmail.com", UserName = "patient", FirstName = "Nikita", LastName = "B" },
+                new Patient { PasswordHash = uniquePassword, Roles = new List<Role>{patientRole},Email = "patient@gmail.com", UserName = "patient", FirstName = "Nikita", LastName = "C" },
+                new Patient { PasswordHash = uniquePassword, Roles = new List<Role>{patientRole},Email = "patient@gmail.com", UserName = "patient", FirstName = "Nikita", LastName = "D" },
+                new Patient { PasswordHash = uniquePassword, Roles = new List<Role>{patientRole},Email = "patient@gmail.com", UserName = "patient", FirstName = "Nikita", LastName = "E" },
+                new Patient { PasswordHash = uniquePassword, Roles = new List<Role>{patientRole},Email = "patient@gmail.com", UserName = "patient", FirstName = "Nikita", LastName = "F" },
+                new Patient { PasswordHash = uniquePassword, Roles = new List<Role>{patientRole},Email = "patient@gmail.com", UserName = "patient", FirstName = "Nikita", LastName = "G" },
+                new Patient { PasswordHash = uniquePassword, Roles = new List<Role>{patientRole},Email = "patient@gmail.com", UserName = "patient", FirstName = "Nikita", LastName = "K" },
+                new Patient { PasswordHash = uniquePassword, Roles = new List<Role>{patientRole},Email = "patient@gmail.com", UserName = "patient", FirstName = "Nikita", LastName = "L" }
+            };
 
             #endregion
 
-            #region CreateUserRoleRelationShip
-
-            var userManager = new UserManager<User, int>(new UserStore(context));
-            var roleManager = new RoleManager<Role, int>(new RoleStore(context));
-
-            userManager.CreateAsync(admin);
-            roleManager.CreateAsync(adminRole);
-            userManager.AddToRoleAsync(admin.Id, adminRole.Name);
-
-            userManager.CreateAsync(nurse);
-            roleManager.CreateAsync(nurseRole);
-            userManager.AddToRoleAsync(nurse.Id, nurseRole.Name);
-
-            userManager.CreateAsync(doctor);
-            roleManager.CreateAsync(doctorRole);
-            userManager.AddToRoleAsync(doctor.Id, doctorRole.Name);
-
-            userManager.CreateAsync(patient);
-            roleManager.CreateAsync(patientRole);
-            userManager.AddToRoleAsync(patient.Id, patientRole.Name);
-
+            #region Add users and roles to context
+            context.Users.Add(admin);
+            context.Users.Add(nurse);
+            context.Doctors.Add(doctor);
+            context.Patients.AddRange(patients);
+            context.SaveChanges();
             #endregion
 
             base.Seed(context);
