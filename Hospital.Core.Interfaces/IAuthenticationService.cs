@@ -2,7 +2,7 @@
 
 namespace Hospital.Core.Interfaces
 {
-    public interface IHomeService
+    public interface IAuthenticationService
     {
         Task<bool> LogIn(string username, string password, bool rememberMe);
         void SignOut(string authType);

@@ -51,7 +51,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IDoctorService.cs" />
-    <Compile Include="IHomeService.cs" />
+    <Compile Include="IAuthenticationService.cs" />
     <Compile Include="ILoggerService.cs" />
     <Compile Include="IPatientService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

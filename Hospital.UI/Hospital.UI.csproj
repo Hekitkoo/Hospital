@@ -195,12 +195,14 @@
     <Compile Include="Areas\Admin\Controllers\DoctorController.cs" />
     <Compile Include="Areas\Admin\Controllers\NurseController.cs" />
     <Compile Include="Areas\Admin\Controllers\PatientController.cs" />
+    <Compile Include="Areas\Admin\Models\CreateDoctorViewModel.cs" />
     <Compile Include="Areas\Admin\Models\CreatePatientViewModel.cs" />
     <Compile Include="Areas\Admin\Models\BaseEntityViewModel.cs" />
     <Compile Include="Areas\Admin\Models\ChangeDoctorViewModel.cs" />
     <Compile Include="Areas\Admin\Models\DoctorViewModel.cs" />
     <Compile Include="Areas\Admin\Models\DoctoTypeViewModel.cs" />
     <Compile Include="Areas\Admin\Models\IndexPatientViewModel.cs" />
+    <Compile Include="Areas\Admin\Models\UserViewModel.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -254,6 +256,9 @@
     <Content Include="Areas\Admin\Views\Nurse\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Doctor\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Patient\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Patient\ChangeDoctor.cshtml" />
+    <Content Include="Areas\Admin\Views\Patient\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Doctor\Create.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />

@@ -91,7 +91,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DoctorService.cs" />
-    <Compile Include="HomeService.cs" />
+    <Compile Include="AuthenticationService.cs" />
     <Compile Include="LoggerService.cs" />
     <Compile Include="PatientService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

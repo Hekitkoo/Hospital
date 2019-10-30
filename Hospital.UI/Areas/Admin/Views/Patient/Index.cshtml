@@ -18,7 +18,7 @@
                         <td>@patient.LastName</td>
                         <td>@patient.FirstName</td>
                         <td>@patient.Birthday.ToShortDateString()</td>
-                        <td>@Html.ActionLink("Details", "Details", "Patient", new {userId = patient.Id}, new {@class = "link-link"})</td>
+                        <td>@Html.ActionLink("Details", "Details", "Patient", new {Id = patient.Id}, new {@class = "btn btn-secondary"})</td>
                     </tr>
                 }
             </table>

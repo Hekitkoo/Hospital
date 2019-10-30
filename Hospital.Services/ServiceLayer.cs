@@ -10,7 +10,7 @@ namespace Hospital.Services
         protected override void Load(ContainerBuilder builder)
         {
             builder.RegisterType<DoctorService>().As<IDoctorService>().InstancePerLifetimeScope();
-            builder.RegisterType<HomeService>().As<IHomeService>().InstancePerLifetimeScope();
+            builder.RegisterType<AuthenticationService>().As<IAuthenticationService>().InstancePerLifetimeScope();
             builder.RegisterType<PatientService>().As<IPatientService>().InstancePerLifetimeScope();
             builder.RegisterType<SigninService>().InstancePerLifetimeScope();
             builder.RegisterType<RoleService>().InstancePerLifetimeScope();

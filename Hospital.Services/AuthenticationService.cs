@@ -4,13 +4,13 @@ using Microsoft.Owin.Security;
 
 namespace Hospital.Services
 {
-    public class HomeService : IHomeService
+    public class AuthenticationService : IAuthenticationService
     {
         private readonly UserService _userService;
         private readonly IAuthenticationManager _authenticationManager;
         private readonly SigninService _signInManager;
 
-        public HomeService(IAuthenticationManager authenticationManager, UserService userService, SigninService signInManager)
+        public AuthenticationService(IAuthenticationManager authenticationManager, UserService userService, SigninService signInManager)
         {
             _userService = userService;
             _signInManager = signInManager;

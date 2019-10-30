@@ -167,23 +167,11 @@ namespace Hospital.DAL
         }
         public void Dispose()
         {
-            // Dispose of unmanaged resources.
-            Dispose(true);
-            // Suppress finalization.
-            GC.SuppressFinalize(this);
-        }
-        protected virtual void Dispose(bool disposing)
-        {
-            if (_disposed)
-                return;
-
-            if (disposing)
+            if (_context != null)
             {
                 _context.Dispose();
             }
-
-            _context = null;
-            _disposed = true;
+            
         }
 
         public Task SetEmailAsync(User user, string email)

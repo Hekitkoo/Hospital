@@ -10,8 +10,8 @@ namespace Hospital.UI.Controllers
     public class HomeController : Controller
     {
         private readonly ILoggerService<HomeController> _loggerService;
-        private readonly IHomeService _homeService;
-        public HomeController(ILoggerService<HomeController> loggerService, IHomeService homeService)
+        private readonly IAuthenticationService _homeService;
+        public HomeController(ILoggerService<HomeController> loggerService, IAuthenticationService homeService)
         {
             _loggerService = loggerService;
             _homeService = homeService;

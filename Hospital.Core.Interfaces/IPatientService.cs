@@ -8,6 +8,7 @@ namespace Hospital.Core.Interfaces
     {
         Task Add(Patient patient);
         bool Unique(Patient patient);
+        void ChangeDoctor(Patient patient);
         void Delete(Patient patient);
         Patient FindByName(string name);
         Patient FindById(int? id);

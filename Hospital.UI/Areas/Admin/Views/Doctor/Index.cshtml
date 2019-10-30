@@ -1,17 +1,28 @@
-﻿
-@{
-    Layout = null;
-}
+﻿@model PagedList.IPagedList<Hospital.UI.Areas.Admin.Models.DoctorViewModel>
+@using PagedList.Mvc;
 
-<!DOCTYPE html>
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Index</title>
-</head>
-<body>
-    <div> 
-    </div>
-</body>
-</html>
+<div class="col-12 col-lg-9 order-lg-0 mt-1 bg-light rounded">
+    <h2 class="text-center">Doctors:</h2>
+    @Html.ActionLink("Create new doctor", "Create", "Doctor", null, new { @class = "btn btn-secondary mb-1" })
+    <table class="table">
+        <tr>
+            <th scope="col">@Html.ActionLink("Last name", "Index", new {sortOrder = ViewBag.NameSortParm, page = ViewBag.CurrentPage})</th>
+            <th scope="col">First name</th>
+            <th scope="col">@Html.ActionLink("Patients", "Index", new {sortOrder = ViewBag.PatientsSortParm, page = ViewBag.CurrentPage})</th>
+            <th></th>
+        </tr>
+        @foreach (var patient in Model)
+        {
+            <tr>
+                <td>@patient.LastName</td>
+                <td>@patient.FirstName</td>
+                <td>@patient.NumberOfPatients</td>
+            </tr>
+        }
+    </table>
+    Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount 
+    @Html.PagedListPager(Model, page => Url.Action("Index", new {page, sortOrder = ViewBag.CurrentSort}))
+
+    @Html.ActionLink("Back to menu", "Index", "Home", null, new { @class = "btn btn-secondary  mb-1" })
+</div>

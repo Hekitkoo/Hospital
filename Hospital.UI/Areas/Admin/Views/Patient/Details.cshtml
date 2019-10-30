@@ -1,0 +1,24 @@
+﻿@model Hospital.UI.Areas.Admin.Models.IndexPatientViewModel
+
+<div class="col-12 col-lg-9 order-lg-0 mt-1 bg-light rounded">
+    <h2 class="text-center">Patient:</h2>
+    @Html.ActionLink("Change doctor", "ChangeDoctor", "Patient", new {id = @Model.Id}, new { @class = "btn btn-secondary mb-1" })
+    <table class="table">
+        <tr>
+            <th scope="col">LastName</th>
+            <th scope="col">First name</th>
+            <th scope="col">Birthday</th>
+            <th scope="col">Doctor</th>
+        </tr>
+        <tr>
+            <td>@Model.LastName</td>
+            <td>@Model.FirstName</td>
+            <td>@Model.Birthday.ToShortDateString()</td>
+            @if (Model.Doctor != null)
+            {
+                <td>@Model.Doctor.LastName</td>
+            }
+        </tr>
+    </table>
+    @Html.ActionLink("Back", "Index", "Patient", null, new { @class = "btn btn-secondary  mb-1" })
+</div>

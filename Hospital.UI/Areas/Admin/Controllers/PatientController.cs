@@ -67,6 +67,7 @@ namespace Hospital.UI.Areas.Admin.Controllers
         {
             if (!ModelState.IsValid)
             {
+                patientViewModel.Doctors = GetDoctorListForPatientsViewModel(_doctorService.GetDoctors());
                 return View(patientViewModel);
             }
             var patient = GetPatientFromViewModel(patientViewModel);
@@ -74,17 +75,59 @@ namespace Hospital.UI.Areas.Admin.Controllers
             if (!_patientService.Unique(patient))
             {
                 ModelState.AddModelError("", "User with same UserName or Email exist!");
+                patientViewModel.Doctors = GetDoctorListForPatientsViewModel(_doctorService.GetDoctors());
                 return View(patientViewModel);
             }
             await _patientService.Add(patient);
             _loggerService.Info($"{User.Identity.Name} added {patient.FirstName} {patient.LastName}");
             return RedirectToAction("Index");
         }
+
+        public ActionResult ChangeDoctor(int id)
+        {
+            var patient = new ChangeDoctorViewModel();
+            patient.Id = id;
+            patient.Doctors = GetDoctorListForPatientsViewModel(_doctorService.GetDoctors());
+            return View(patient);
+        }
+
+        [HttpPost]
+        public ActionResult ChangeDoctor(ChangeDoctorViewModel patientvm)
+        {
+            if (!ModelState.IsValid)
+            {
+                patientvm.Doctors = GetDoctorListForPatientsViewModel(_doctorService.GetDoctors());
+                return View(patientvm);
+            }
+            var patient = _patientService.FindById(patientvm.Id);
+            patient.DoctorId = patientvm.DoctorId;
+            _patientService.ChangeDoctor(patient);
+            _loggerService.Info($"{User.Identity.Name} changed patients {patient.FirstName} {patient.LastName} (doctor changed) ");
+            return RedirectToAction("Details","Patient", new {id = patientvm.Id});
+        }
+
+        public ActionResult Details(int id)
+        {
+            var patient = GetIndexPatientViewModel(_patientService.FindById(id));
+
+            if (patient != null)
+            {
+                return View(patient);
+            }
+            return HttpNotFound();
+        }
         private IEnumerable<IndexPatientViewModel> GetPatientsForViewModel(IEnumerable<Patient> patients)
         {
             return _mapper.Map<IEnumerable<Patient>, IEnumerable<IndexPatientViewModel>>(patients);
         }
-
+        private Patient GetPatientFromViewModel(CreatePatientViewModel patient)
+        {
+            return _mapper.Map<CreatePatientViewModel, Patient>(patient);
+        }
+        private IndexPatientViewModel GetIndexPatientViewModel(Patient patient)
+        {
+            return _mapper.Map<Patient, IndexPatientViewModel>(patient);
+        }
         private ICollection<SelectListItem> GetDoctorListForPatientsViewModel(IEnumerable<Doctor> doctors)
         {
             var doctorSelectListItems = new List<SelectListItem>();
@@ -97,11 +140,6 @@ namespace Hospital.UI.Areas.Admin.Controllers
                 });
             }
             return doctorSelectListItems;
-        }
-
-        private Patient GetPatientFromViewModel(CreatePatientViewModel patient)
-        {
-            return _mapper.Map<CreatePatientViewModel, Patient>(patient);
         }
     }
 }

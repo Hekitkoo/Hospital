@@ -4,7 +4,7 @@ namespace Hospital.Core.Models
 {
     public class Diagnosis : BaseEntity
     {
-        public bool Cured { get; set; }
+        public bool IsCured { get; set; }
         public string DefinitiveDiagnosis { get; set; }
         public virtual PatientCard PatientCard { get; set; }
         public virtual ICollection<Prescription> Prescriptions { get; set; }

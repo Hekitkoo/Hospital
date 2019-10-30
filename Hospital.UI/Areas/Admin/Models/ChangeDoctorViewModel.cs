@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Web.Mvc;
 using Hospital.Core.Models;
 
 namespace Hospital.UI.Areas.Admin.Models
@@ -7,7 +8,8 @@ namespace Hospital.UI.Areas.Admin.Models
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public ICollection<DoctorViewModel> Doctors { get; set; }
+        public int DoctorId { get; set; }
+        public ICollection<SelectListItem> Doctors { get; set; }
 
     }
 }

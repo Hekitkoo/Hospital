@@ -16,7 +16,7 @@ namespace Hospital.Services
         private readonly IDoctorService _doctorService;
         private readonly ILoggerService<PatientService> _loggerService;
         private readonly RoleService _roleService;
-        private static string roleName = "patient";
+        private const string RoleName = "patient";
 
         public PatientService(UserService userService, ILoggerService<PatientService> loggerService, HospitalContext context, IDoctorService doctorService, RoleService roleService)
         {
@@ -32,7 +32,7 @@ namespace Hospital.Services
             try
             {
                 patient.Doctor = _doctorService.FindById(patient.DoctorId);
-                patient.Roles.Add(await _roleService.FindByNameAsync(roleName));
+                patient.Roles.Add(await _roleService.FindByNameAsync(RoleName));
                 await _userService.CreateAsync(patient, patient.PasswordHash);
             }
             catch (Exception e)
@@ -53,6 +53,20 @@ namespace Hospital.Services
             }
 
             return true;
+        }
+
+        public void ChangeDoctor(Patient patient)
+        {
+            try
+            {
+                patient.Doctor = _doctorService.FindById(patient.DoctorId);
+                Update(patient);
+            }
+            catch (Exception e)
+            {
+                _loggerService.Error($"{e}");
+                throw;
+            }
         }
 
         public void Delete(Patient patient)
@@ -76,7 +90,7 @@ namespace Hospital.Services
 
         public Patient FindById(int? id)
         {
-            return _context.Patients.FirstOrDefault(p => p.Id == id);
+            return _context.Patients.Include(d=>d.Doctor).FirstOrDefault(p => p.Id == id);
         }
 
         public IEnumerable<Patient> GetPatients()

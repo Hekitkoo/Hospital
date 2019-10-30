@@ -13,6 +13,7 @@ namespace Hospital.UI
             CreateMap<Patient, CreatePatientViewModel>().ReverseMap();
             CreateMap<Patient, ChangeDoctorViewModel>().ReverseMap();
             CreateMap<Doctor, DoctorViewModel>().ReverseMap();
+            CreateMap<Doctor, CreateDoctorViewModel>().ReverseMap();
             CreateMap<Specialty, DoctoTypeViewModel>().ReverseMap();
         }
     }

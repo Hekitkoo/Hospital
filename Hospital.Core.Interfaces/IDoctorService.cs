@@ -1,15 +1,16 @@
 ﻿using Hospital.Core.Models;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Hospital.Core.Interfaces
 {
     public interface IDoctorService
     {
-        void Add(Doctor doctor);
-        void Delete(Doctor doctor);
-        Doctor FindByName(string name);
+        Task Add(Doctor doctor);
         Doctor FindById(int? id);
         IEnumerable<Doctor> GetDoctors();
-        void Update(Doctor doctor);
+        bool Unique(Doctor doctor);
+        IEnumerable<Specialty> GetAllSpecialties();
+        Specialty FindSpeciality(int? id);
     }
 }
