@@ -1,4 +1,4 @@
-﻿namespace Hospital.Core.Interfaces
+﻿namespace Hospital.Service.Interfaces
 {
     public interface ILoggerService<T>
         where T : class

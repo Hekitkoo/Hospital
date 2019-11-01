@@ -48,7 +48,7 @@
     <Compile Include="BaseEntity.cs" />
     <Compile Include="Diagnosis.cs" />
     <Compile Include="Doctor.cs" />
-    <Compile Include="Specialty.cs" />
+    <Compile Include="Speciality.cs" />
     <Compile Include="Patient.cs" />
     <Compile Include="PatientCard.cs" />
     <Compile Include="PrescritionType.cs" />

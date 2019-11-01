@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 using System.Web.Mvc;
-using Hospital.Core.Interfaces;
+using Hospital.Service.Interfaces;
 using Hospital.UI.Models;
 using Microsoft.AspNet.Identity;
 

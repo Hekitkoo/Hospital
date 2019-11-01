@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace Hospital.UI.Areas.Admin.Models
+namespace Hospital.UI.Models
 {
-    public class IndexPatientViewModel : BaseEntityViewModel
+    public class PatientViewModel : BaseEntityViewModel
     {
         public string LastName { get; set; }
         public string FirstName { get; set; }

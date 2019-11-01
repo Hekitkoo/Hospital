@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using Hospital.Core.Models;
 
-namespace Hospital.Core.Interfaces
+namespace Hospital.Service.Interfaces
 {
     public interface IPatientService
     {

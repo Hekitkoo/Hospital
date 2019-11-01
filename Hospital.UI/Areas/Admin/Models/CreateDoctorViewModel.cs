@@ -6,6 +6,6 @@ namespace Hospital.UI.Areas.Admin.Models
     public class CreateDoctorViewModel : UserViewModel
     {
         public int SpecialityId { get; set; }
-        public IEnumerable<SelectListItem> Speciality { get; set; }
+        public IEnumerable<SelectListItem> Specialities { get; set; }
     }
 }

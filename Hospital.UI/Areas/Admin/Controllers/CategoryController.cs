@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using Hospital.Core.Interfaces;
-using Hospital.UI.Areas.Admin.Models;
+using Hospital.UI.Models;
 
 namespace Hospital.UI.Areas.Admin.Controllers
 {
@@ -18,7 +16,7 @@ namespace Hospital.UI.Areas.Admin.Controllers
         {
             return View();
         }
-        public ActionResult Index(IEnumerable<IndexPatientViewModel> patients, string sortOrder)
+        public ActionResult Index(IEnumerable<PatientViewModel> patients, string sortOrder)
         {
             ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
             ViewBag.DateSortParm = sortOrder == "Date" ? "date_desc" : "Date";

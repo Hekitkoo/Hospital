@@ -1,6 +1,6 @@
 ﻿using System.Web;
 using Autofac;
-using Hospital.Core.Interfaces;
+using Hospital.Service.Interfaces;
 using Microsoft.AspNet.Identity.Owin;
 
 namespace Hospital.Services
@@ -12,11 +12,12 @@ namespace Hospital.Services
             builder.RegisterType<DoctorService>().As<IDoctorService>().InstancePerLifetimeScope();
             builder.RegisterType<AuthenticationService>().As<IAuthenticationService>().InstancePerLifetimeScope();
             builder.RegisterType<PatientService>().As<IPatientService>().InstancePerLifetimeScope();
+            builder.RegisterType<SpecialityService>().As<ISpecialityService>().InstancePerLifetimeScope();
             builder.RegisterType<SigninService>().InstancePerLifetimeScope();
             builder.RegisterType<RoleService>().InstancePerLifetimeScope();
             builder.RegisterType<UserService>().InstancePerLifetimeScope();
             builder.RegisterGeneric(typeof(LoggerService<>)).As(typeof(ILoggerService<>));
-            builder.Register(c => HttpContext.Current.GetOwinContext().Authentication);
+            builder.Register(c => HttpContext.Current.GetOwinContext().Authentication).InstancePerLifetimeScope();
             builder.Register(c => new IdentityFactoryOptions<Services.UserService>
             {
                 DataProtectionProvider = new Microsoft.Owin.Security.DataProtection.DpapiDataProtectionProvider("Application​")

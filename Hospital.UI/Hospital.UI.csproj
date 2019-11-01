@@ -195,19 +195,19 @@
     <Compile Include="Areas\Admin\Controllers\DoctorController.cs" />
     <Compile Include="Areas\Admin\Controllers\NurseController.cs" />
     <Compile Include="Areas\Admin\Controllers\PatientController.cs" />
-    <Compile Include="Areas\Admin\Models\CreateDoctorViewModel.cs" />
-    <Compile Include="Areas\Admin\Models\CreatePatientViewModel.cs" />
-    <Compile Include="Areas\Admin\Models\BaseEntityViewModel.cs" />
-    <Compile Include="Areas\Admin\Models\ChangeDoctorViewModel.cs" />
-    <Compile Include="Areas\Admin\Models\DoctorViewModel.cs" />
-    <Compile Include="Areas\Admin\Models\DoctoTypeViewModel.cs" />
-    <Compile Include="Areas\Admin\Models\IndexPatientViewModel.cs" />
-    <Compile Include="Areas\Admin\Models\UserViewModel.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\BaseEntityViewModel.cs" />
+    <Compile Include="Areas\Admin\Models\ChangeDoctorViewModel.cs" />
+    <Compile Include="Areas\Admin\Models\CreateDoctorViewModel.cs" />
+    <Compile Include="Areas\Admin\Models\CreatePatientViewModel.cs" />
+    <Compile Include="Models\DoctorViewModel.cs" />
+    <Compile Include="Models\DoctoTypeViewModel.cs" />
+    <Compile Include="Models\PatientViewModel.cs" />
     <Compile Include="Models\LoginViewModel.cs" />
+    <Compile Include="Areas\Admin\Models\UserViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -312,10 +312,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Hospital.Core.Interfaces\Hospital.Core.Interfaces.csproj">
-      <Project>{8CC0B5C9-F6D2-4C7C-AA9C-724256687FAE}</Project>
-      <Name>Hospital.Core.Interfaces</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Hospital.Core.Models\Hospital.Core.Models.csproj">
       <Project>{EABB3DC2-40D4-44AF-AFC0-D6D691A1348B}</Project>
       <Name>Hospital.Core.Models</Name>
@@ -323,6 +319,10 @@
     <ProjectReference Include="..\Hospital.DAL\Hospital.DAL.csproj">
       <Project>{041B6B67-090E-4220-A205-4E99EF809E1E}</Project>
       <Name>Hospital.DAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Hospital.Service.Interfaces\Hospital.Service.Interfaces.csproj">
+      <Project>{27DA41AB-7833-4B61-B395-A66A4A659A1D}</Project>
+      <Name>Hospital.Service.Interfaces</Name>
     </ProjectReference>
     <ProjectReference Include="..\Hospital.Services\Hospital.Services.csproj">
       <Project>{91E9EC3E-A7C2-4579-833D-780396F366F8}</Project>

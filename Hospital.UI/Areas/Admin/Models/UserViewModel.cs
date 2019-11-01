@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using Hospital.UI.Models;
 
 namespace Hospital.UI.Areas.Admin.Models
 {

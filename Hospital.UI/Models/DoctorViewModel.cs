@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Web.Mvc;
-
-namespace Hospital.UI.Areas.Admin.Models
+﻿namespace Hospital.UI.Models
 {
     public class DoctorViewModel : BaseEntityViewModel
     {

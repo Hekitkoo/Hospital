@@ -98,13 +98,10 @@
     <Compile Include="RoleService.cs" />
     <Compile Include="ServiceLayer.cs" />
     <Compile Include="SigninService.cs" />
+    <Compile Include="SpecialityService.cs" />
     <Compile Include="UserService.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Hospital.Core.Interfaces\Hospital.Core.Interfaces.csproj">
-      <Project>{8CC0B5C9-F6D2-4C7C-AA9C-724256687FAE}</Project>
-      <Name>Hospital.Core.Interfaces</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Hospital.Core.Models\Hospital.Core.Models.csproj">
       <Project>{EABB3DC2-40D4-44AF-AFC0-D6D691A1348B}</Project>
       <Name>Hospital.Core.Models</Name>
@@ -112,6 +109,10 @@
     <ProjectReference Include="..\Hospital.DAL\Hospital.DAL.csproj">
       <Project>{041B6B67-090E-4220-A205-4E99EF809E1E}</Project>
       <Name>Hospital.DAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Hospital.Service.Interfaces\Hospital.Service.Interfaces.csproj">
+      <Project>{27DA41AB-7833-4B61-B395-A66A4A659A1D}</Project>
+      <Name>Hospital.Service.Interfaces</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

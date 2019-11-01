@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
-using AutoMapper;
+﻿using AutoMapper;
 using Hospital.Core.Models;
 using Hospital.UI.Areas.Admin.Models;
+using Hospital.UI.Models;
 
 namespace Hospital.UI
 {
@@ -9,12 +9,12 @@ namespace Hospital.UI
     {
         public AutoMapperConfig()
         {
-            CreateMap<Patient,IndexPatientViewModel>().ReverseMap();
+            CreateMap<Patient,PatientViewModel>().ReverseMap();
             CreateMap<Patient, CreatePatientViewModel>().ReverseMap();
             CreateMap<Patient, ChangeDoctorViewModel>().ReverseMap();
             CreateMap<Doctor, DoctorViewModel>().ReverseMap();
             CreateMap<Doctor, CreateDoctorViewModel>().ReverseMap();
-            CreateMap<Specialty, DoctoTypeViewModel>().ReverseMap();
+            CreateMap<Speciality, DoctoTypeViewModel>().ReverseMap();
         }
     }
 }

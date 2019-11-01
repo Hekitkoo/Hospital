@@ -1,4 +1,4 @@
-﻿using Hospital.Core.Interfaces;
+﻿using Hospital.Service.Interfaces;
 using NLog;
 
 namespace Hospital.Services

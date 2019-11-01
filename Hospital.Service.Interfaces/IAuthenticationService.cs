@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace Hospital.Core.Interfaces
+namespace Hospital.Service.Interfaces
 {
     public interface IAuthenticationService
     {

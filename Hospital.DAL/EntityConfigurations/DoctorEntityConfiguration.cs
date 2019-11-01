@@ -7,10 +7,11 @@ namespace Hospital.DAL.EntityConfigurations
     {
         public DoctorEntityConfiguration()
         {
-            HasOptional(d => d.Specialty)
+            HasRequired(d => d.Speciality)
                 .WithMany(dt => dt.Doctors);
             HasMany(d=>d.Patients)
                 .WithOptional(p=>p.Doctor);
+            Ignore(d => d.NumberOfPatients);
         }
     }
 }

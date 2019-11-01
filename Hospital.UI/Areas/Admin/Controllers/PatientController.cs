@@ -5,9 +5,10 @@ using System.Threading.Tasks;
 using System.Web.Mvc;
 using AutoMapper;
 using PagedList;
-using Hospital.Core.Interfaces;
 using Hospital.Core.Models;
+using Hospital.Service.Interfaces;
 using Hospital.UI.Areas.Admin.Models;
+using Hospital.UI.Models;
 
 namespace Hospital.UI.Areas.Admin.Controllers
 {
@@ -33,7 +34,7 @@ namespace Hospital.UI.Areas.Admin.Controllers
             ViewBag.CurrentPage = page;
             ViewBag.NameSortParm  = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
             ViewBag.DateSortParm = sortOrder == "Date" ? "date_desc" : "Date";
-            IEnumerable<IndexPatientViewModel> patients = GetPatientsForViewModel(_patientService.GetPatients());
+            IEnumerable<PatientViewModel> patients = GetPatientsForViewModel(_patientService.GetPatients());
             switch (sortOrder)
             {
                 case "name_desc":
@@ -116,17 +117,17 @@ namespace Hospital.UI.Areas.Admin.Controllers
             }
             return HttpNotFound();
         }
-        private IEnumerable<IndexPatientViewModel> GetPatientsForViewModel(IEnumerable<Patient> patients)
+        private IEnumerable<PatientViewModel> GetPatientsForViewModel(IEnumerable<Patient> patients)
         {
-            return _mapper.Map<IEnumerable<Patient>, IEnumerable<IndexPatientViewModel>>(patients);
+            return _mapper.Map<IEnumerable<Patient>, IEnumerable<PatientViewModel>>(patients);
         }
         private Patient GetPatientFromViewModel(CreatePatientViewModel patient)
         {
             return _mapper.Map<CreatePatientViewModel, Patient>(patient);
         }
-        private IndexPatientViewModel GetIndexPatientViewModel(Patient patient)
+        private PatientViewModel GetIndexPatientViewModel(Patient patient)
         {
-            return _mapper.Map<Patient, IndexPatientViewModel>(patient);
+            return _mapper.Map<Patient, PatientViewModel>(patient);
         }
         private ICollection<SelectListItem> GetDoctorListForPatientsViewModel(IEnumerable<Doctor> doctors)
         {

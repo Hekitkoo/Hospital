@@ -11,9 +11,6 @@ namespace Hospital.DAL
     public class UserStore : IUserRoleStore<User, int>, IUserPasswordStore<User, int>, IUserEmailStore<User, int>
     {
         private HospitalContext _context;
-        // Flag: Has Dispose already been called?
-        private bool _disposed;
-
         public UserStore(HospitalContext context)
         {
             _context = context;

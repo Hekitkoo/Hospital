@@ -8,7 +8,7 @@ namespace Hospital.DAL
     {
         public DbSet<Diagnosis> Diagnoses { get; set; }
         public DbSet<Doctor> Doctors { get; set; }
-        public DbSet<Specialty> Specialties { get; set; }
+        public DbSet<Speciality> Specialties { get; set; }
         public DbSet<Patient> Patients { get; set; }
         public DbSet<PatientCard> PatientCards { get; set; }
         public DbSet<Prescription> Prescriptions { get; set; }
@@ -18,7 +18,6 @@ namespace Hospital.DAL
 
         public HospitalContext() : base("HospitalContext")
         {
-            //Configuration.LazyLoadingEnabled = false;
             Database.SetInitializer(new HospitalInitializer());
         }
 

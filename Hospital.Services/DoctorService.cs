@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
-using Hospital.Core.Interfaces;
+using Hospital.Service.Interfaces;
 using Hospital.Core.Models;
 using Hospital.DAL;
 
@@ -14,22 +14,21 @@ namespace Hospital.Services
         private readonly HospitalContext _context;
         private readonly UserService _userService;
         private readonly ILoggerService<DoctorService> _loggerService;
-        private readonly RoleService _roleService;
-        private const string RoleName = "doctor";
-        public DoctorService(HospitalContext context, UserService userService, ILoggerService<DoctorService> loggerService, RoleService roleService)
+        private readonly Role _role;
+        public DoctorService(HospitalContext context, UserService userService, ILoggerService<DoctorService> loggerService)
         {
             _context = context;
             _userService = userService;
             _loggerService = loggerService;
-            _roleService = roleService;
+            _role = _context.Roles.FirstOrDefault(r => r.Name == "doctor");
         }
 
         public async Task Add(Doctor doctor)
         {
             try
             {
-                doctor.Specialty = FindSpeciality(doctor.SpecialityId);
-                var role = await _roleService.FindByNameAsync(RoleName);
+                doctor.Speciality = _context.Specialties.FirstOrDefault(s => s.Id == doctor.SpecialityId);
+                var role = _role;
                 doctor.Roles.Add(role);
                 await _userService.CreateAsync(doctor);
             }
@@ -38,8 +37,6 @@ namespace Hospital.Services
                 _loggerService.Error($"{e}");
                 throw;
             }
-            _context.Doctors.Add(doctor);
-            _context.SaveChanges();
         }
 
         public Doctor FindById(int? id)
@@ -69,16 +66,6 @@ namespace Hospital.Services
         {
             _context.Entry(doctor).State = EntityState.Modified;
             _context.SaveChanges();
-        }
-
-        public IEnumerable<Specialty> GetAllSpecialties()
-        {
-            return _context.Specialties;
-        }
-
-        public Specialty FindSpeciality(int? id)
-        {
-            return _context.Specialties.FirstOrDefault(s => s.Id == id);
         }
     }
 }

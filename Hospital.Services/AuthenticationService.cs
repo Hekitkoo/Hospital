@@ -1,5 +1,5 @@
 ﻿using System.Threading.Tasks;
-using Hospital.Core.Interfaces;
+using Hospital.Service.Interfaces;
 using Microsoft.Owin.Security;
 
 namespace Hospital.Services

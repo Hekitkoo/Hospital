@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Web.Mvc;
-using Hospital.Core.Models;
+using Hospital.UI.Models;
 
 namespace Hospital.UI.Areas.Admin.Models
 {

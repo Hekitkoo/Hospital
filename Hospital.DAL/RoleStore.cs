@@ -9,9 +9,6 @@ namespace Hospital.DAL
     public class RoleStore : IRoleStore<Role, int>
     {
         private HospitalContext _context;
-        // Flag: Has Dispose already been called?
-        private bool _disposed;
-
         public RoleStore(HospitalContext context)
         {
             _context = context;

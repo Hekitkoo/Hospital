@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Web;
 using System.Web.Mvc;
 using AutoMapper;
-using Hospital.Core.Interfaces;
+using Hospital.Service.Interfaces;
 using Hospital.Core.Models;
 using Hospital.UI.Areas.Admin.Models;
+using Hospital.UI.Models;
 using PagedList;
 
 namespace Hospital.UI.Areas.Admin.Controllers
@@ -16,14 +16,16 @@ namespace Hospital.UI.Areas.Admin.Controllers
     public class DoctorController : Controller
     {
         private readonly IDoctorService _doctorService;
+        private readonly ISpecialityService _specialityService;
         private readonly IMapper _mapper;
         private readonly ILoggerService<DoctorController> _loggerService;
 
-        public DoctorController(IDoctorService doctorService, IMapper mapper, ILoggerService<DoctorController> loggerService)
+        public DoctorController(IDoctorService doctorService, IMapper mapper, ILoggerService<DoctorController> loggerService, ISpecialityService specialityService)
         {
             _doctorService = doctorService;
             _mapper = mapper;
             _loggerService = loggerService;
+            _specialityService = specialityService;
         }
         public ActionResult Index(string sortOrder, int? page)
         {
@@ -55,7 +57,7 @@ namespace Hospital.UI.Areas.Admin.Controllers
         public ActionResult Create()
         {
             var doctor = new CreateDoctorViewModel();
-            doctor.Speciality = GetDoctorTypeListForPatientsViewModel(_doctorService.GetAllSpecialties());
+            doctor.Specialities = GetDoctorTypeListForPatientsViewModel(_specialityService.GetAllSpecialities());
             return View(doctor);
         }
 
@@ -64,7 +66,7 @@ namespace Hospital.UI.Areas.Admin.Controllers
         {
             if (!ModelState.IsValid)
             {
-                doctorViewModel.Speciality = GetDoctorTypeListForPatientsViewModel(_doctorService.GetAllSpecialties());
+                doctorViewModel.Specialities = GetDoctorTypeListForPatientsViewModel(_specialityService.GetAllSpecialities());
                 return View(doctorViewModel);
             }
             var doctor = GetDoctorFromViewModel(doctorViewModel);
@@ -72,7 +74,7 @@ namespace Hospital.UI.Areas.Admin.Controllers
             if (!_doctorService.Unique(doctor))
             {
                 ModelState.AddModelError("", "Doctor with same UserName or Email exist!");
-                doctorViewModel.Speciality = GetDoctorTypeListForPatientsViewModel(_doctorService.GetAllSpecialties());
+                doctorViewModel.Specialities = GetDoctorTypeListForPatientsViewModel(_specialityService.GetAllSpecialities());
                 return View(doctorViewModel);
             }
             await _doctorService.Add(doctor);
@@ -80,7 +82,7 @@ namespace Hospital.UI.Areas.Admin.Controllers
             return RedirectToAction("Index");
         }
 
-        private ICollection<SelectListItem> GetDoctorTypeListForPatientsViewModel(IEnumerable<Specialty> specialties)
+        private ICollection<SelectListItem> GetDoctorTypeListForPatientsViewModel(IEnumerable<Speciality> specialties)
         {
             var specialtySelectListItems = new List<SelectListItem>();
             foreach (var specialty in specialties)

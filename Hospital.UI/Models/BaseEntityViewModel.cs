@@ -1,4 +1,4 @@
-﻿namespace Hospital.UI.Areas.Admin.Models
+﻿namespace Hospital.UI.Models
 {
     public class BaseEntityViewModel
     {
