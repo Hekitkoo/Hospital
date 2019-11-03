@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
@@ -14,19 +13,19 @@ namespace Hospital.Services
         private readonly HospitalContext _context;
         private readonly UserService _userService;
         private readonly ILoggerService<DoctorService> _loggerService;
-        private readonly Role _role;
+        private Role _role;
         public DoctorService(HospitalContext context, UserService userService, ILoggerService<DoctorService> loggerService)
         {
             _context = context;
             _userService = userService;
             _loggerService = loggerService;
-            _role = _context.Roles.FirstOrDefault(r => r.Name == "doctor");
         }
 
-        public async Task Add(Doctor doctor)
+        public async Task Create(Doctor doctor)
         {
             try
             {
+                _role = _context.Roles.FirstOrDefault(r => r.Name == "doctor");
                 doctor.Speciality = _context.Specialties.FirstOrDefault(s => s.Id == doctor.SpecialityId);
                 var role = _role;
                 doctor.Roles.Add(role);
@@ -41,17 +40,35 @@ namespace Hospital.Services
 
         public IQueryable<Doctor> FindById(int? id)
         {
-            return _context.Doctors.Where(d => d.Id == id).AsQueryable();
+            try
+            {
+                return _context.Doctors.Where(d => d.Id == id).AsQueryable();
+            }
+            catch (Exception e)
+            {
+                _loggerService.Error($"{e}");
+                throw;
+            }
         }
 
         public IQueryable<Doctor> GetDoctors()
         {
-            return _context.Doctors.AsQueryable();
+            try
+            {
+                return _context.Doctors.AsQueryable();
+            }
+            catch (Exception e)
+            {
+                _loggerService.Error($"{e}"); ;
+                throw;
+            }
         }
 
         public bool CheckUniqueness(Doctor doctor)
         {
-            var userByName = _userService.FindByNameAsync(doctor.UserName).Result;
+            try
+            {
+                var userByName = _userService.FindByNameAsync(doctor.UserName).Result;
             var userByEmail = _userService.FindByEmailAsync(doctor.Email).Result;
 
             if (userByName != null || userByEmail != null)
@@ -60,6 +77,12 @@ namespace Hospital.Services
             }
 
             return true;
+            }
+            catch (Exception e)
+            {
+                _loggerService.Error($"{e}"); ;
+                throw;
+            }
         }
 
         public void Update(Doctor doctor)

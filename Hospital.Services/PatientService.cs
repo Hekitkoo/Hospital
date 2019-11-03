@@ -14,20 +14,20 @@ namespace Hospital.Services
         private readonly HospitalContext _context;
         private readonly UserService _userService;
         private readonly ILoggerService<PatientService> _loggerService;
-        private readonly Role _role;
+        private Role _role;
 
         public PatientService(UserService userService, ILoggerService<PatientService> loggerService, HospitalContext context)
         {
             _userService = userService;
             _loggerService = loggerService;
             _context = context;
-            _role = _context.Roles.FirstOrDefault(r=>r.Name=="patient");
         }
 
         public async Task Add(Patient patient)
         {
             try
             {
+                _role = _context.Roles.FirstOrDefault(r => r.Name == "patient");
                 patient.Doctor = _context.Doctors.FirstOrDefault(d => d.Id == patient.DoctorId);
                 patient.Roles.Add(_role);
                 await _userService.CreateAsync(patient);
