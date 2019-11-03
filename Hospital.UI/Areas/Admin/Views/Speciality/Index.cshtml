@@ -1,0 +1,21 @@
+﻿@model IEnumerable<Hospital.UI.Models.SpecialityViewModel>
+
+    <div class="col-12 col-lg-9 order-lg-0 mt-1 bg-light rounded">
+        <h2 class="text-center">Specialities:</h2>
+        @Html.ActionLink("Create new speciality", "Create", "Speciality", null, new { @class = "btn btn-secondary mb-1" })
+        <table class="table">
+            <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Actions</th>
+            </tr>
+            @foreach (var speciality in Model)
+            {
+                <tr>
+                    <td>@speciality.Name</td>
+                    <td>@Html.ActionLink("Details", "Details", "Speciality", new { Id = speciality.Id }, new { @class = "btn btn-secondary" })</td>
+                </tr>
+            }
+        </table>
+
+        @Html.ActionLink("Back to menu", "Index", "Home", null, new { @class = "btn btn-secondary  mb-1" })
+    </div>

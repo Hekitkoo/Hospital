@@ -34,7 +34,7 @@ namespace Hospital.UI.Areas.Admin.Controllers
             ViewBag.CurrentPage = page;
             ViewBag.NameSortParm  = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
             ViewBag.DateSortParm = sortOrder == "Date" ? "date_desc" : "Date";
-            IEnumerable<PatientViewModel> patients = GetPatientsForViewModel(_patientService.GetPatients());
+            IEnumerable<PatientViewModel> patients = _patientService.GetPatients().ProjectToQueryable<PatientViewModel>();
             switch (sortOrder)
             {
                 case "name_desc":
@@ -58,8 +58,10 @@ namespace Hospital.UI.Areas.Admin.Controllers
 
         public ActionResult Create()
         {
-            var patient = new CreatePatientViewModel();
-            patient.Doctors = GetDoctorListForPatientsViewModel(_doctorService.GetDoctors());
+            var patient = new CreatePatientViewModel
+            {
+                Doctors = GetDoctorListForPatientsViewModel(_doctorService.GetDoctors())
+            };
             return View(patient);
         }
 
@@ -71,9 +73,9 @@ namespace Hospital.UI.Areas.Admin.Controllers
                 patientViewModel.Doctors = GetDoctorListForPatientsViewModel(_doctorService.GetDoctors());
                 return View(patientViewModel);
             }
-            var patient = GetPatientFromViewModel(patientViewModel);
+            var patient = _mapper.Map<CreatePatientViewModel, Patient>(patientViewModel);
 
-            if (!_patientService.Unique(patient))
+            if (!_patientService.CheckUniqueness(patient))
             {
                 ModelState.AddModelError("", "User with same UserName or Email exist!");
                 patientViewModel.Doctors = GetDoctorListForPatientsViewModel(_doctorService.GetDoctors());
@@ -86,9 +88,10 @@ namespace Hospital.UI.Areas.Admin.Controllers
 
         public ActionResult ChangeDoctor(int id)
         {
-            var patient = new ChangeDoctorViewModel();
-            patient.Id = id;
-            patient.Doctors = GetDoctorListForPatientsViewModel(_doctorService.GetDoctors());
+            var patient = new ChangeDoctorViewModel
+            {
+                Id = id, Doctors = GetDoctorListForPatientsViewModel(_doctorService.GetDoctors())
+            };
             return View(patient);
         }
 
@@ -100,7 +103,11 @@ namespace Hospital.UI.Areas.Admin.Controllers
                 patientvm.Doctors = GetDoctorListForPatientsViewModel(_doctorService.GetDoctors());
                 return View(patientvm);
             }
-            var patient = _patientService.FindById(patientvm.Id);
+            var patient = _patientService.FindById(patientvm.Id).First();
+            if (patient == null)
+            {
+                return HttpNotFound();
+            }
             patient.DoctorId = patientvm.DoctorId;
             _patientService.ChangeDoctor(patient);
             _loggerService.Info($"{User.Identity.Name} changed patients {patient.FirstName} {patient.LastName} (doctor changed) ");
@@ -109,7 +116,7 @@ namespace Hospital.UI.Areas.Admin.Controllers
 
         public ActionResult Details(int id)
         {
-            var patient = GetIndexPatientViewModel(_patientService.FindById(id));
+            var patient = _patientService.FindById(id).ProjectToSingleOrDefault<PatientViewModel>();
 
             if (patient != null)
             {
@@ -117,18 +124,7 @@ namespace Hospital.UI.Areas.Admin.Controllers
             }
             return HttpNotFound();
         }
-        private IEnumerable<PatientViewModel> GetPatientsForViewModel(IEnumerable<Patient> patients)
-        {
-            return _mapper.Map<IEnumerable<Patient>, IEnumerable<PatientViewModel>>(patients);
-        }
-        private Patient GetPatientFromViewModel(CreatePatientViewModel patient)
-        {
-            return _mapper.Map<CreatePatientViewModel, Patient>(patient);
-        }
-        private PatientViewModel GetIndexPatientViewModel(Patient patient)
-        {
-            return _mapper.Map<Patient, PatientViewModel>(patient);
-        }
+
         private ICollection<SelectListItem> GetDoctorListForPatientsViewModel(IEnumerable<Doctor> doctors)
         {
             var doctorSelectListItems = new List<SelectListItem>();

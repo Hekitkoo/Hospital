@@ -33,7 +33,8 @@ namespace Hospital.UI.Areas.Admin.Controllers
             ViewBag.CurrentPage = page;
             ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
             ViewBag.PatientsSortParm = sortOrder == "Number" ? "number_desc" : "Number";
-            IEnumerable<DoctorViewModel> doctors = GetDoctorsForViewModel(_doctorService.GetDoctors());
+            IQueryable<DoctorViewModel> doctors =
+                _doctorService.GetDoctors().ProjectToQueryable<DoctorViewModel>();
             switch (sortOrder)
             {
                 case "name_desc":
@@ -66,15 +67,17 @@ namespace Hospital.UI.Areas.Admin.Controllers
         {
             if (!ModelState.IsValid)
             {
-                doctorViewModel.Specialities = GetDoctorTypeListForPatientsViewModel(_specialityService.GetAllSpecialities());
+                doctorViewModel.Specialities = 
+                    GetDoctorTypeListForPatientsViewModel(_specialityService.GetAllSpecialities());
                 return View(doctorViewModel);
             }
-            var doctor = GetDoctorFromViewModel(doctorViewModel);
+            var doctor = _mapper.Map<CreateDoctorViewModel, Doctor>(doctorViewModel);
 
-            if (!_doctorService.Unique(doctor))
+            if (!_doctorService.CheckUniqueness(doctor))
             {
                 ModelState.AddModelError("", "Doctor with same UserName or Email exist!");
-                doctorViewModel.Specialities = GetDoctorTypeListForPatientsViewModel(_specialityService.GetAllSpecialities());
+                doctorViewModel.Specialities =
+                    GetDoctorTypeListForPatientsViewModel(_specialityService.GetAllSpecialities());
                 return View(doctorViewModel);
             }
             await _doctorService.Add(doctor);
@@ -82,7 +85,16 @@ namespace Hospital.UI.Areas.Admin.Controllers
             return RedirectToAction("Index");
         }
 
-        private ICollection<SelectListItem> GetDoctorTypeListForPatientsViewModel(IEnumerable<Speciality> specialties)
+        public ActionResult Details(int? id)
+        {
+            var doctor = _doctorService.FindById(id).ProjectToSingleOrDefault<DetailsDoctorViewModel>();
+            if (doctor != null)
+            {
+                return View(doctor);
+            }
+            return HttpNotFound();
+        }
+        private ICollection<SelectListItem> GetDoctorTypeListForPatientsViewModel(IQueryable<Speciality> specialties)
         {
             var specialtySelectListItems = new List<SelectListItem>();
             foreach (var specialty in specialties)
@@ -94,14 +106,6 @@ namespace Hospital.UI.Areas.Admin.Controllers
                 });
             }
             return specialtySelectListItems;
-        }
-        private IEnumerable<DoctorViewModel> GetDoctorsForViewModel(IEnumerable<Doctor> doctors)
-        {
-            return _mapper.Map<IEnumerable<Doctor>, IEnumerable<DoctorViewModel>>(doctors);
-        }
-        private Doctor GetDoctorFromViewModel(CreateDoctorViewModel doctorViewModel)
-        {
-            return _mapper.Map<CreateDoctorViewModel, Doctor>(doctorViewModel);
         }
     }
 }

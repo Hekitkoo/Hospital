@@ -1,0 +1,20 @@
+﻿@model Hospital.UI.Models.SpecialityViewModel
+
+<div class="col-12 col-lg-9 order-lg-0 mt-1 bg-light rounded">
+    @using (Html.BeginForm())
+    {
+        <h2 class="text-center">Create Speciality:</h2>
+        <div class=" form-group col-md-10 ">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.LabelFor(m => m.Name)
+            @Html.EditorFor(m => m.Name, new { htmlAttributes = new { placeholder = @Html.DisplayNameFor(m => m.Name), @class = "form-control text-center" } })
+            @Html.ValidationMessageFor(m => m.Name, "", new { @class = "text-danger" })
+        </div>
+        <div class="form-group">
+            <div class="col-md-10">
+                <input type="submit" value="Submit" class="btn btn-secondary" />
+            </div>
+        </div>
+    }
+    @Html.ActionLink("Back", "Index", "Speciality", null, new { @class = "btn btn-secondary mb-1" })
+</div>

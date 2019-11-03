@@ -1,11 +1,13 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Hospital.Core.Models;
 
 namespace Hospital.Service.Interfaces
 {
     public interface ISpecialityService
     {
-        void CreateSpeciality(Speciality speciality);
-        IEnumerable<Speciality> GetAllSpecialities();
+        void Create(Speciality speciality);
+        IQueryable<Speciality> FindById(int? id);
+        IQueryable<Speciality> GetAllSpecialities();
     }
 }

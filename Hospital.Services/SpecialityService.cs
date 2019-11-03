@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Hospital.Core.Models;
 using Hospital.DAL;
 using Hospital.Service.Interfaces;
@@ -13,14 +14,20 @@ namespace Hospital.Services
         {
             _context = context;
         }
-        public void CreateSpeciality(Speciality speciality)
+
+        public void Create(Speciality speciality)
         {
             throw new System.NotImplementedException();
         }
 
-        public IEnumerable<Speciality> GetAllSpecialities()
+        public IQueryable<Speciality> FindById(int? id)
         {
-            return _context.Specialties;
+            return _context.Specialties.Where(s => s.Id == id).AsQueryable();
+        }
+
+        public IQueryable<Speciality> GetAllSpecialities()
+        {
+            return _context.Specialties.AsQueryable();
         }
     }
 }

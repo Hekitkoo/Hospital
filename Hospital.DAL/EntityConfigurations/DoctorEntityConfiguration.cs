@@ -11,7 +11,6 @@ namespace Hospital.DAL.EntityConfigurations
                 .WithMany(dt => dt.Doctors);
             HasMany(d=>d.Patients)
                 .WithOptional(p=>p.Doctor);
-            Ignore(d => d.NumberOfPatients);
         }
     }
 }

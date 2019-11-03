@@ -12,13 +12,14 @@
             <th scope="col">@Html.ActionLink("Patients", "Index", new {sortOrder = ViewBag.PatientsSortParm, page = ViewBag.CurrentPage})</th>
             <th></th>
         </tr>
-        @foreach (var patient in Model)
+        @foreach (var doctor in Model)
         {
-            <tr>
-                <td>@patient.LastName</td>
-                <td>@patient.FirstName</td>
-                <td>@patient.NumberOfPatients</td>
-            </tr>
+    <tr>
+        <td>@doctor.LastName</td>
+        <td>@doctor.FirstName</td>
+        <td>@doctor.NumberOfPatients</td>
+        <td>@Html.ActionLink("Details", "Details", "Doctor", new { Id = doctor.Id }, new { @class = "btn btn-secondary" })</td>
+    </tr>
         }
     </table>
     Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount 

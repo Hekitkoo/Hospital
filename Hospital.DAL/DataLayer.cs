@@ -10,7 +10,6 @@ namespace Hospital.DAL
         {
             builder.RegisterType<HospitalContext>().AsSelf().InstancePerLifetimeScope();
             builder.RegisterType<UserStore>().As<IUserStore<User,int>>().InstancePerLifetimeScope();
-            //builder.RegisterType<UserStore>().As<IUserPasswordStore<User, int>>().InstancePerLifetimeScope();
             builder.RegisterType<RoleStore>().As<IRoleStore<Role,int>>().InstancePerLifetimeScope();
         }
     }

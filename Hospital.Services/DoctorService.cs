@@ -39,17 +39,17 @@ namespace Hospital.Services
             }
         }
 
-        public Doctor FindById(int? id)
+        public IQueryable<Doctor> FindById(int? id)
         {
-            return _context.Doctors.FirstOrDefault(d => d.Id == id);
+            return _context.Doctors.Where(d => d.Id == id).AsQueryable();
         }
 
-        public IEnumerable<Doctor> GetDoctors()
+        public IQueryable<Doctor> GetDoctors()
         {
-            return _context.Doctors;
+            return _context.Doctors.AsQueryable();
         }
 
-        public bool Unique(Doctor doctor)
+        public bool CheckUniqueness(Doctor doctor)
         {
             var userByName = _userService.FindByNameAsync(doctor.UserName).Result;
             var userByEmail = _userService.FindByEmailAsync(doctor.Email).Result;

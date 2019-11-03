@@ -36,9 +36,13 @@
                 <li class="nav-item">
                     @Html.ActionLink("Doctors", "Index", new { area = "Admin", controller = "Doctor" }, new { @class = "nav-link" })
                 </li>
+                <li class="nav-item">
+                    @Html.ActionLink("Doctors Speciality", "Index", new { area = "Admin", controller = "Speciality" }, new { @class = "nav-link" })
+
+                </li>
             }
             <li class="nav-item">
-                @Html.ActionLink("Contact", "Contact", new { area = "", controller = "Home"}, new { @class = "nav-link" })
+                @Html.ActionLink("Contact", "Contact", new { area = "", controller = "Home" }, new { @class = "nav-link" })
             </li>
         </ul>
     </nav>

@@ -1,0 +1,22 @@
+﻿@model Hospital.UI.Areas.Admin.Models.DetailsSpecialityViewModel
+
+<div class="col-12 col-lg-9 order-lg-0 mt-1 bg-light rounded">
+
+    <h2 class="text-center">@Model.Name Doctors:</h2>
+    <table class="table">
+        <tr>
+            <th scope="col">LastName</th>
+            <th scope="col">First name</th>
+            <th scope="col">Actions</th>
+        </tr>
+        @foreach (var doctor in Model.Doctors)
+        {
+            <tr>
+                <td>@doctor.LastName</td>
+                <td>@doctor.FirstName</td>
+                <td>@Html.ActionLink("Details", "Details", "Doctor", new { Id = doctor.Id }, new { @class = "btn btn-secondary" })</td>
+            </tr>
+        }
+    </table>
+    @Html.ActionLink("Back", "Index", "Speciality", null, new { @class = "btn btn-secondary  mb-1" })
+</div>

@@ -190,7 +190,8 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
-    <Compile Include="Areas\Admin\Controllers\CategoryController.cs" />
+    <Compile Include="Areas\Admin\Models\DetailsSpecialityViewModel.cs" />
+    <Compile Include="Areas\Admin\Controllers\SpecialityController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\DoctorController.cs" />
     <Compile Include="Areas\Admin\Controllers\NurseController.cs" />
@@ -203,8 +204,9 @@
     <Compile Include="Areas\Admin\Models\ChangeDoctorViewModel.cs" />
     <Compile Include="Areas\Admin\Models\CreateDoctorViewModel.cs" />
     <Compile Include="Areas\Admin\Models\CreatePatientViewModel.cs" />
+    <Compile Include="Models\DetailsDoctorViewModel.cs" />
     <Compile Include="Models\DoctorViewModel.cs" />
-    <Compile Include="Models\DoctoTypeViewModel.cs" />
+    <Compile Include="Models\SpecialityViewModel.cs" />
     <Compile Include="Models\PatientViewModel.cs" />
     <Compile Include="Models\LoginViewModel.cs" />
     <Compile Include="Areas\Admin\Models\UserViewModel.cs" />
@@ -251,7 +253,7 @@
     <Content Include="Scripts\esm\popper-utils.js.map" />
     <Content Include="Areas\Admin\Views\web.config" />
     <Content Include="Areas\Admin\Views\Home\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\Category\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Speciality\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Patient\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Nurse\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Doctor\Index.cshtml" />
@@ -259,6 +261,9 @@
     <Content Include="Areas\Admin\Views\Patient\ChangeDoctor.cshtml" />
     <Content Include="Areas\Admin\Views\Patient\Details.cshtml" />
     <Content Include="Areas\Admin\Views\Doctor\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Doctor\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Speciality\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Speciality\Create.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />

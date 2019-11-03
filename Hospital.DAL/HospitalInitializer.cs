@@ -53,6 +53,7 @@ namespace Hospital.DAL
             };
 
             #endregion
+
             #region Add all entity to context
             context.Users.Add(admin);
             context.Users.Add(nurse);

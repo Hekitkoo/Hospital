@@ -14,9 +14,10 @@ namespace Hospital.UI
             builder.RegisterControllers(typeof(MvcApplication).Assembly);
             builder.RegisterModule(new DAL.DataLayer());
             builder.RegisterModule(new Services.ServiceLayer());
+
             builder.Register(ctx => new MapperConfiguration(cfg =>
             {
-                cfg.AddProfile(new AutoMapperConfig());
+                cfg.AddProfile(AutoMapperConfig.Initialize());
             }));
             builder.Register(ctx => ctx.Resolve<MapperConfiguration>().CreateMapper()).As<IMapper>().InstancePerLifetimeScope();
             var container = builder.Build();

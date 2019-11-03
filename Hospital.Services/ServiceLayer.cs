@@ -18,9 +18,9 @@ namespace Hospital.Services
             builder.RegisterType<UserService>().InstancePerLifetimeScope();
             builder.RegisterGeneric(typeof(LoggerService<>)).As(typeof(ILoggerService<>));
             builder.Register(c => HttpContext.Current.GetOwinContext().Authentication).InstancePerLifetimeScope();
-            builder.Register(c => new IdentityFactoryOptions<Services.UserService>
+            builder.Register(c => new IdentityFactoryOptions<UserService>
             {
-                DataProtectionProvider = new Microsoft.Owin.Security.DataProtection.DpapiDataProtectionProvider("Application​")
+                DataProtectionProvider = new Microsoft.Owin.Security.DataProtection.DpapiDataProtectionProvider("Hospital​")
             });
            
         }

@@ -39,19 +39,14 @@ namespace Hospital.Services
             }
         }
 
-        public bool Unique(Patient patient)
+        public bool CheckUniqueness(Patient patient)
         {
             try
             {
                 var userByName = _userService.FindByNameAsync(patient.UserName).Result;
                 var userByEmail = _userService.FindByEmailAsync(patient.Email).Result;
 
-                if (userByName != null || userByEmail != null)
-                {
-                    return false;
-                }
-
-                return true;
+                return userByName == null && userByEmail == null;
             }
             catch (Exception e)
             {
@@ -94,14 +89,14 @@ namespace Hospital.Services
             return _context.Patients.FirstOrDefault(p => p.UserName == name);
         }
 
-        public Patient FindById(int? id)
+        public IQueryable<Patient> FindById(int? id)
         {
-            return _context.Patients.Include(d=>d.Doctor).FirstOrDefault(p => p.Id == id);
+            return _context.Patients.Where(p => p.Id == id);
         }
 
-        public IEnumerable<Patient> GetPatients()
+        public IQueryable<Patient> GetPatients()
         {
-            return _context.Patients;
+            return _context.Patients.AsQueryable();
         }
 
         public void Update(Patient patient)

@@ -14,6 +14,7 @@ namespace Hospital.Core.Models
         public string UserName { get; set; }
         public string PasswordHash { get; set; }
         public virtual ICollection<Role> Roles { get; set; }
+
         public User()
         {
             Roles = new List<Role>();

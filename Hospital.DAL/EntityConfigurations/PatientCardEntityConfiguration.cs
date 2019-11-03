@@ -1,5 +1,4 @@
-﻿using System;
-using System.Data.Entity.ModelConfiguration;
+﻿using System.Data.Entity.ModelConfiguration;
 using Hospital.Core.Models;
 
 namespace Hospital.DAL.EntityConfigurations
