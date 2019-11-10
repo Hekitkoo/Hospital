@@ -80,7 +80,7 @@ namespace Hospital.UI.Areas.Admin.Controllers
                     GetDoctorTypeListForPatientsViewModel(_specialityService.GetAllSpecialities());
                 return View(doctorViewModel);
             }
-            await _doctorService.Add(doctor);
+            await _doctorService.Create(doctor);
             _loggerService.Info($"{User.Identity.Name} added {doctor.FirstName} {doctor.LastName}");
             return RedirectToAction("Index");
         }
