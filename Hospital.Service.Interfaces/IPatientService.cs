@@ -5,10 +5,9 @@ using Hospital.Core.Models;
 
 namespace Hospital.Service.Interfaces
 {
-    public interface IPatientService
+    public interface IPatientService : IUserServiceHelper
     {
-        Task Add(Patient patient);
-        bool CheckUniqueness(Patient patient);
+        Task Create(Patient patient);
         void ChangeDoctor(Patient patient);
         void Delete(Patient patient);
         Patient FindByName(string name);

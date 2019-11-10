@@ -20,6 +20,8 @@ namespace Hospital.UI
             CreateMap<Doctor, DetailsDoctorViewModel>();
             CreateMap<Speciality, SpecialityViewModel>().ReverseMap();
             CreateMap<Speciality, DetailsSpecialityViewModel>();
+            CreateMap<User, NurseViewModel>();
+            CreateMap<CreateNurseViewModel, User>().ReverseMap();
         }
 
         public static AutoMapperConfig Initialize()

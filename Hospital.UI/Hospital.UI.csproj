@@ -188,6 +188,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Models\CreateNurseViewModel.cs" />
     <Compile Include="Areas\Admin\Models\DetailsSpecialityViewModel.cs" />
     <Compile Include="Areas\Admin\Controllers\SpecialityController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
@@ -204,6 +205,7 @@
     <Compile Include="Areas\Admin\Models\CreatePatientViewModel.cs" />
     <Compile Include="Models\DetailsDoctorViewModel.cs" />
     <Compile Include="Models\DoctorViewModel.cs" />
+    <Compile Include="Models\NurseViewModel.cs" />
     <Compile Include="Models\SpecialityViewModel.cs" />
     <Compile Include="Models\PatientViewModel.cs" />
     <Compile Include="Models\LoginViewModel.cs" />
@@ -262,6 +264,8 @@
     <Content Include="Areas\Admin\Views\Doctor\Details.cshtml" />
     <Content Include="Areas\Admin\Views\Speciality\Details.cshtml" />
     <Content Include="Areas\Admin\Views\Speciality\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Nurse\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Nurse\Details.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -310,6 +314,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\Admin\Views\Shared\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

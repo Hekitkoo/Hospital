@@ -93,6 +93,7 @@
     <Compile Include="DoctorService.cs" />
     <Compile Include="AuthenticationService.cs" />
     <Compile Include="LoggerService.cs" />
+    <Compile Include="NurseService.cs" />
     <Compile Include="PatientService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RoleService.cs" />

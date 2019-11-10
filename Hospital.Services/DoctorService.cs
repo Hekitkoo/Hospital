@@ -64,7 +64,7 @@ namespace Hospital.Services
             }
         }
 
-        public bool CheckUniqueness(Doctor doctor)
+        public bool CheckUniqueness(User doctor)
         {
             try
             {

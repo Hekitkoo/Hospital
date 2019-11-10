@@ -81,7 +81,7 @@ namespace Hospital.UI.Areas.Admin.Controllers
                 patientViewModel.Doctors = GetDoctorListForPatientsViewModel(_doctorService.GetDoctors());
                 return View(patientViewModel);
             }
-            await _patientService.Add(patient);
+            await _patientService.Create(patient);
             _loggerService.Info($"{User.Identity.Name} added {patient.FirstName} {patient.LastName}");
             return RedirectToAction("Index");
         }

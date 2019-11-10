@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Hospital.Core.Models;
 using Hospital.DAL;
@@ -9,25 +10,53 @@ namespace Hospital.Services
     public class SpecialityService : ISpecialityService
     {
         private readonly HospitalContext _context;
+        private readonly ILoggerService<SpecialityService> _loggerService;
 
-        public SpecialityService(HospitalContext context)
+        public SpecialityService(HospitalContext context, ILoggerService<SpecialityService> loggerService)
         {
             _context = context;
+            _loggerService = loggerService;
         }
 
         public void Create(Speciality speciality)
         {
-            throw new System.NotImplementedException();
+            try
+            {
+                _context.Specialties.Add(speciality);
+                _context.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                _loggerService.Error($"{e}");
+                throw;
+            }
         }
 
         public IQueryable<Speciality> FindById(int? id)
         {
-            return _context.Specialties.Where(s => s.Id == id).AsQueryable();
+            try
+            {
+                return _context.Specialties.Where(s => s.Id == id).AsQueryable();
+            }
+            catch (Exception e)
+            {
+                _loggerService.Error($"{e}");
+                throw;
+            }
+           
         }
 
         public IQueryable<Speciality> GetAllSpecialities()
         {
-            return _context.Specialties.AsQueryable();
+            try
+            {
+                return _context.Specialties.AsQueryable();
+            }
+            catch (Exception e)
+            {
+                _loggerService.Error($"{e}");
+                throw;
+            }
         }
     }
 }

@@ -1,17 +1,23 @@
-﻿
-@{
-    Layout = null;
-}
+﻿@model IEnumerable<Hospital.UI.Models.NurseViewModel>
 
-<!DOCTYPE html>
+<div class="col-12 col-lg-9 order-lg-0 mt-1 bg-light rounded">
+    <h2 class="text-center">Nurses:</h2>
+    @Html.ActionLink("Add new Nurse", "Create", "Nurse", null, new { @class = "btn btn-secondary mb-1" })
+    <table class="table">
+        <tr>
+            <th scope="col">FirstName</th>
+            <th scope="col">LastName</th>
+            <th scope="col">Actions</th>
+        </tr>
+        @foreach (var nurse in Model)
+        {
+    <tr>
+        <td>@nurse.FirstName</td>
+        <td>@nurse.LastName</td>
+        <td>@Html.ActionLink("Details", "Details", "Nurse", new { Id = nurse.Id }, new { @class = "btn btn-secondary" })</td>
+    </tr>
+        }
+    </table>
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Index</title>
-</head>
-<body>
-    <div> 
-    </div>
-</body>
-</html>
+    @Html.ActionLink("Back to menu", "Index", "Home", null, new { @class = "btn btn-secondary  mb-1" })
+</div>

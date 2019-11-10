@@ -23,7 +23,7 @@ namespace Hospital.Services
             _context = context;
         }
 
-        public async Task Add(Patient patient)
+        public async Task Create(Patient patient)
         {
             try
             {
@@ -39,7 +39,7 @@ namespace Hospital.Services
             }
         }
 
-        public bool CheckUniqueness(Patient patient)
+        public bool CheckUniqueness(User patient)
         {
             try
             {

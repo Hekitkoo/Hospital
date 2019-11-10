@@ -38,20 +38,15 @@ namespace Hospital.DAL
             
             var admin = new User {Roles = new List<Role> {new Role {Name = "admin"}}, Email = "admin@hospital.com.ua", UserName = "admin", FirstName = "Nikita", LastName = "Watashi", PasswordHash = password };
             var nurse = new User { Roles = new List<Role> { new Role { Name = "nurse" } }, Email = "nurse@hospital.com.ua", UserName = "nurse", FirstName = "Nikita", LastName = "GaDono", PasswordHash = password };
-            var patients = new List<Patient>
-            {
-                new Patient { PasswordHash = password, Roles = new List<Role>{patientRole},Email = "patient@gmail.com", UserName = "patient", FirstName = "Nikita", LastName = "KaMitekudasai" },
-                new Patient { PasswordHash = password, Roles = new List<Role>{patientRole},Email = "patient@gmail.com", UserName = "patient", FirstName = "Nikita", LastName = "A" },
-                new Patient { PasswordHash = password, Roles = new List<Role>{patientRole},Email = "patient@gmail.com", UserName = "patient", FirstName = "Nikita", LastName = "B" },
-                new Patient { PasswordHash = password, Roles = new List<Role>{patientRole},Email = "patient@gmail.com", UserName = "patient", FirstName = "Nikita", LastName = "C" },
-                new Patient { PasswordHash = password, Roles = new List<Role>{patientRole},Email = "patient@gmail.com", UserName = "patient", FirstName = "Nikita", LastName = "D" },
-                new Patient { PasswordHash = password, Roles = new List<Role>{patientRole},Email = "patient@gmail.com", UserName = "patient", FirstName = "Nikita", LastName = "E" },
-                new Patient { PasswordHash = password, Roles = new List<Role>{patientRole},Email = "patient@gmail.com", UserName = "patient", FirstName = "Nikita", LastName = "F" },
-                new Patient { PasswordHash = password, Roles = new List<Role>{patientRole},Email = "patient@gmail.com", UserName = "patient", FirstName = "Nikita", LastName = "G" },
-                new Patient { PasswordHash = password, Roles = new List<Role>{patientRole},Email = "patient@gmail.com", UserName = "patient", FirstName = "Nikita", LastName = "K" },
-                new Patient { PasswordHash = password, Roles = new List<Role>{patientRole},Email = "patient@gmail.com", UserName = "patient", FirstName = "Nikita", LastName = "L" }
-            };
 
+            var firstNames = new[] { "Nikita", "Igor", "Misha", "Ira", "Tanya", "Artem", "Pavel", "Irma" };
+            var lastNames2 = new[] { "KaMitekudasai" , "Adara", "Badara", "Madara", "Arara", "Irata", "Makynda", "Arkynda", "Lolelo" };
+            var patients = new List<Patient>();
+            for (int i = 0; i < firstNames.Length; i++)
+            {
+                var patient = new Patient { PasswordHash = password, Roles = new List<Role> { patientRole }, Email = $"patient{i}@gmail.com", UserName = $"patient{i}", FirstName = firstNames[i], LastName = lastNames2[i] };
+                patients.Add(patient);
+            }
             #endregion
 
             #region Add all entity to context
