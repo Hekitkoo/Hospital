@@ -28,6 +28,7 @@ namespace Hospital.Services
             {
                 _role = _context.Roles.FirstOrDefault(r => r.Name == "patient");
                 patient.Doctor = _context.Doctors.FirstOrDefault(d => d.Id == patient.DoctorId);
+                patient.PatientCard = new PatientCard();
                 patient.Roles.Add(_role);
                 await _userService.CreateAsync(patient);
             }
@@ -83,20 +84,6 @@ namespace Hospital.Services
             
         }
 
-        public Patient FindByName(string name)
-        {
-            try
-            {
-                return _context.Patients.FirstOrDefault(p => p.UserName == name);
-            }
-            catch (Exception e)
-            {
-                _loggerService.Error($"{e}");
-                throw;
-            }
-           
-        }
-
         public IQueryable<Patient> FindById(int? id)
         {
             try
@@ -131,48 +118,6 @@ namespace Hospital.Services
             {
                 _context.Entry(patient).State = EntityState.Modified;
                 _context.SaveChanges();
-            }
-            catch (Exception e)
-            {
-                _loggerService.Error($"{e}");
-                throw;
-            }
-
-        }
-
-        public IQueryable<PatientCard> FindCardByPatientId(int? id)
-        {
-            try
-            {
-                return from patientCard in _context.PatientCards
-                       where patientCard.Patient.Id == id
-                       select patientCard;
-            }
-            catch (Exception e)
-            {
-                _loggerService.Error($"{e}");
-                throw;
-            }
-        }
-
-        public IQueryable<Diagnosis> FindDiagnosisById(int? id)
-        {
-            try
-            {
-                return _context.Diagnoses.Where(d => d.Id == id);
-            }
-            catch (Exception e)
-            {
-                _loggerService.Error($"{e}");
-                throw;
-            }
-        }
-
-        public IQueryable<Prescription> FindPrescriptionById(int? id)
-        {
-            try
-            {
-                return _context.Prescriptions.Where(d => d.Id == id);
             }
             catch (Exception e)
             {

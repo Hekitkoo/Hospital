@@ -11,6 +11,7 @@ namespace Hospital.Services
         {
             builder.RegisterType<DoctorService>().As<IDoctorService>().InstancePerLifetimeScope();
             builder.RegisterType<NurseService>().As<INurseService>().InstancePerLifetimeScope();
+            builder.RegisterType<PatientCardService>().As<IPatientCardService>().InstancePerLifetimeScope();
             builder.RegisterType<AuthenticationService>().As<IAuthenticationService>().InstancePerLifetimeScope();
             builder.RegisterType<PatientService>().As<IPatientService>().InstancePerLifetimeScope();
             builder.RegisterType<SpecialityService>().As<ISpecialityService>().InstancePerLifetimeScope();

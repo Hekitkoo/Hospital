@@ -11,7 +11,7 @@ namespace Hospital.UI
         private static AutoMapperConfig _profile;
         private AutoMapperConfig()
         {
-            CreateMap<Patient, PatientViewModel>();
+            CreateMap<Patient, PatientViewModel>().ForMember(pvm => pvm.PatientCardId, conf => conf.MapFrom(p => p.PatientCard.Id));
             CreateMap<Patient, CreatePatientViewModel>().ReverseMap();
             CreateMap<Patient, ChangeDoctorViewModel>();
             CreateMap<Doctor, DoctorViewModel>().ForMember(dv => dv.NumberOfPatients,

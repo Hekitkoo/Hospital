@@ -6,6 +6,7 @@ namespace Hospital.UI.Models
     {
         public string LastName { get; set; }
         public string FirstName { get; set; }
+        public int? PatientCardId { get; set; }
         public DateTime Birthday { get; set; }
         public DoctorViewModel Doctor { get; set; }
     }

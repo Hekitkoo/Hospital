@@ -86,7 +86,7 @@ namespace Hospital.DAL
             var patients = new List<Patient>();
             for (int i = 0; i < firstNames.Length; i++)
             {
-                var patient = new Patient { PasswordHash = password, Roles = new List<Role> { patientRole }, Email = $"patient{i}@gmail.com", UserName = $"patient{i}", FirstName = firstNames[i], LastName = lastNames2[i] };
+                var patient = new Patient { PasswordHash = password, Roles = new List<Role> { patientRole }, Email = $"patient{i}@gmail.com", UserName = $"patient{i}", FirstName = firstNames[i], LastName = lastNames2[i], PatientCard = new PatientCard() };
                 patients.Add(patient);
             }
             #endregion

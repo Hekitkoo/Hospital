@@ -1,17 +1,10 @@
 ﻿@model Hospital.UI.Models.PatientCardViewModel
 
 <div class="col-12 col-lg-9 order-lg-0 mt-1 bg-light rounded">
-    <h2 class="text-center">Patient Card:</h2>
-    <table class="table">
-        <tr>
-            <th scope="col">LastName</th>
-            <th scope="col">First name</th>
-        </tr>
-        <tr>
-            <td>@Model.Patient.LastName</td>
-            <td>@Model.Patient.FirstName</td>
-        </tr>
-    </table>
+    <h2 class="text-center">@Model.Patient.LastName @Model.Patient.FirstName Card:</h2>
+    @if (User.IsInRole("doctor")){
+    @Html.ActionLink("Add Diagnosis", "CreateDaignosis", "Doctor", null, new { @class = "btn btn-secondary  mb-1" })
+    }
     <h2 class="text-center">Diagnoses:</h2>
     <table class="table">
         <tr>
@@ -24,7 +17,13 @@
             <tr>
                 <td>@diagnosis.DefinitiveDiagnosis</td>
                 <td>@diagnosis.IsCured</td>
-                <td>@Html.ActionLink("Details", "DiagnosisDetails", "Patient", new { Id = diagnosis.Id }, new { @class = "btn btn-secondary" })</td>
+                <td>
+                    @Html.ActionLink("Details", "DiagnosisDetails", "Patient", new { Id = diagnosis.Id }, new { @class = "btn btn-secondary" })
+                    @if (User.IsInRole("doctor")){
+                    @Html.ActionLink("ChangeDiagnosis", "ChangeDiagnosis", "Doctor", new { Id = diagnosis.Id }, new { @class = "btn btn-secondary" })
+                    }
+                </td>
+
             </tr>
         }
     </table>

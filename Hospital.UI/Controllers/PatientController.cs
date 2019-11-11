@@ -11,12 +11,14 @@ namespace Hospital.UI.Controllers
     public class PatientController : Controller
     {
         private readonly IPatientService _patientService;
+        private readonly IPatientCardService _patientCardService;
         private readonly IMapper _mapper;
 
-        public PatientController(IMapper mapper, IPatientService patientService)
+        public PatientController(IMapper mapper, IPatientService patientService, IPatientCardService patientCardService)
         {
             _mapper = mapper;
             _patientService = patientService;
+            _patientCardService = patientCardService;
         }
         // GET: Patient
         public ActionResult Index()
@@ -31,8 +33,7 @@ namespace Hospital.UI.Controllers
         }
         public ActionResult CardDetails(int? id)
         {
-            var patientCard = _patientService.FindCardByPatientId(id).ProjectToSingleOrDefault<PatientCardViewModel>();
-
+            var patientCard = _patientCardService.FindCardById(id).ProjectToSingleOrDefault<PatientCardViewModel>();
             if (patientCard != null)
             {
                 return View(patientCard);
@@ -42,7 +43,7 @@ namespace Hospital.UI.Controllers
 
         public ActionResult DiagnosisDetails(int? id)
         {
-            var patientDiagnosis = _patientService.FindDiagnosisById(id).ProjectToSingleOrDefault<DiagnosisViewModel>();
+            var patientDiagnosis = _patientCardService.FindDiagnosisById(id).ProjectToSingleOrDefault<DiagnosisViewModel>();
             if (patientDiagnosis != null)
             {
                 return View(patientDiagnosis);
@@ -51,7 +52,7 @@ namespace Hospital.UI.Controllers
         }
         public ActionResult PrescriptionDetails(int? id)
         {
-            var patientPrescription = _patientService.FindPrescriptionById(id).ProjectToSingleOrDefault<PresctiptionViewModel>();
+            var patientPrescription = _patientCardService.FindPrescriptionById(id).ProjectToSingleOrDefault<PresctiptionViewModel>();
             if (patientPrescription != null)
             {
                 return View(patientPrescription);

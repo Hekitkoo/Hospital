@@ -45,6 +45,7 @@
     <Compile Include="IDoctorService.cs" />
     <Compile Include="ILoggerService.cs" />
     <Compile Include="INurseService.cs" />
+    <Compile Include="IPatientCardService.cs" />
     <Compile Include="IPatientService.cs" />
     <Compile Include="ISpecialityService.cs" />
     <Compile Include="IUserServiceHelper.cs" />

@@ -11,7 +11,7 @@
         <tr>
             <td>@Model.LastName</td>
             <td>@Model.FirstName</td>
-            <td>@Html.ActionLink("My Card", "CardDetails", "Patient", new { Id = @Model.Id }, new { @class = "btn btn-secondary" })</td>
+            <td>@Html.ActionLink("My Card", "CardDetails", "Patient", new { Id = @Model.PatientCardId }, new { @class = "btn btn-secondary" })</td>
         </tr>
     </table>
     @Html.ActionLink("Back", "Index", "Home", null, new { @class = "btn btn-secondary  mb-1" })
