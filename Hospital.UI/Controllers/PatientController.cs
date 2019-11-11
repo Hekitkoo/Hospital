@@ -22,7 +22,7 @@ namespace Hospital.UI.Controllers
         public ActionResult Index()
         {
             int id = Convert.ToInt32(User.Identity.GetUserId());
-            var patient = _patientService.FindById(id);
+            var patient = _patientService.FindById(id).ProjectToSingleOrDefault<PatientViewModel>();
             if (patient != null)
             {
                 return View(patient);
@@ -46,6 +46,15 @@ namespace Hospital.UI.Controllers
             if (patientDiagnosis != null)
             {
                 return View(patientDiagnosis);
+            }
+            return HttpNotFound();
+        }
+        public ActionResult PrescriptionDetails(int? id)
+        {
+            var patientPrescription = _patientService.FindPrescriptionById(id).ProjectToSingleOrDefault<PresctiptionViewModel>();
+            if (patientPrescription != null)
+            {
+                return View(patientPrescription);
             }
             return HttpNotFound();
         }

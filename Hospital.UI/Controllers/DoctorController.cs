@@ -27,6 +27,7 @@ namespace Hospital.UI.Controllers
             var doctor = _doctorService.FindById(id).ProjectToSingleOrDefault<DetailsDoctorViewModel>() ;
             if (doctor != null)
             {
+               
                 return View(doctor);
             }
             return HttpNotFound();

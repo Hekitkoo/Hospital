@@ -167,5 +167,18 @@ namespace Hospital.Services
                 throw;
             }
         }
+
+        public IQueryable<Prescription> FindPrescriptionById(int? id)
+        {
+            try
+            {
+                return _context.Prescriptions.Where(d => d.Id == id);
+            }
+            catch (Exception e)
+            {
+                _loggerService.Error($"{e}");
+                throw;
+            }
+        }
     }
 }

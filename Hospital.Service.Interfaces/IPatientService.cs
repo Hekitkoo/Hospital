@@ -15,5 +15,6 @@ namespace Hospital.Service.Interfaces
         void Update(Patient patient);
         IQueryable<PatientCard> FindCardByPatientId(int? id);
         IQueryable<Diagnosis> FindDiagnosisById(int? id);
+        IQueryable<Prescription> FindPrescriptionById(int? id);
     }
 }

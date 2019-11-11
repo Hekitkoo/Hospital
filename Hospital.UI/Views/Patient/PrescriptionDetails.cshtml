@@ -1,0 +1,16 @@
+﻿@model Hospital.UI.Models.PresctiptionViewModel
+
+<div class="col-12 col-lg-9 order-lg-0 mt-1 bg-light rounded">
+    <h2 class="text-center">Prescription:</h2>
+    <table class="table">
+        <tr>
+            <th scope="col">Description</th>
+            <th scope="col">Is Done</th>
+        </tr>
+        <tr>
+            <td>@Model.Description</td>
+            <td>@Model.IsDone</td>
+        </tr>
+    </table>
+    @Html.ActionLink("Back", "Index", "Home", null, new { @class = "btn btn-secondary  mb-1" })
+</div>

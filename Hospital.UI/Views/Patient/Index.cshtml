@@ -1,0 +1,18 @@
+﻿@model Hospital.UI.Models.PatientViewModel
+
+<div class="col-12 col-lg-9 order-lg-0 mt-1 bg-light rounded">
+    <h2 class="text-center">Patient:</h2>
+    <table class="table">
+        <tr>
+            <th scope="col">LastName</th>
+            <th scope="col">First name</th>
+            <th scope="col">Actions</th>
+        </tr>
+        <tr>
+            <td>@Model.LastName</td>
+            <td>@Model.FirstName</td>
+            <td>@Html.ActionLink("My Card", "CardDetails", "Patient", new { Id = @Model.Id }, new { @class = "btn btn-secondary" })</td>
+        </tr>
+    </table>
+    @Html.ActionLink("Back", "Index", "Home", null, new { @class = "btn btn-secondary  mb-1" })
+</div>

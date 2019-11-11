@@ -1,0 +1,20 @@
+﻿@if (User.Identity.IsAuthenticated)
+{
+    <div class="col-12 col-lg-9 order-lg-0 bg-light mt-1 rounded">
+        <div class="row h-100 justify-content-center align-items-center">
+            <p class="text-center">
+            Ooops 404, something was wrong. Please @User.Identity.Name, @Html.ActionLink("Contact", "Contact", "Home") us.<br/>
+            </p>
+        </div>
+    </div>
+}
+else
+{
+    <div class="col-12 h-100 col-lg-12 order-lg-0 bg-light mt-1 rounded">
+        <div class="row h-100 justify-content-center align-items-center">
+            <p class="text-center">
+                Ooops 404,something was wrong. Please, @Html.ActionLink("Contact", "Contact", "Home") us.<br/>
+            </p>
+        </div>
+    </div>
+}
