@@ -1,6 +1,5 @@
 ﻿using System.Web.Mvc;
 using System.Web.Routing;
-using System.Xml.XPath;
 
 namespace Hospital.UI
 {

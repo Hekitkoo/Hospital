@@ -13,10 +13,10 @@
             @if (User.IsInRole("doctor"))
             {
                 <li class="nav-item">
-                    @Html.ActionLink("Patients", "Index", "Patient", null, new { @class = "nav-link" })
+                    @Html.ActionLink("My cabinet", "Index", "Doctor", null, new { @class = "nav-link" })
                 </li>
                 <li class="nav-item">
-                    @Html.ActionLink("Procedures", "Procedures", "Doctor", null, new { @class = "nav-link" })
+                    @Html.ActionLink("My Procedures", "Procedures", "Doctor", null, new { @class = "nav-link" })
                 </li>
             }
             @if (User.IsInRole("nurse"))

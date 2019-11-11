@@ -3,10 +3,6 @@ using Hospital.Core.Models;
 using Hospital.Service.Interfaces;
 using Hospital.UI.Areas.Admin.Models;
 using Hospital.UI.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace Hospital.UI.Areas.Admin.Controllers

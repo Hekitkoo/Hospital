@@ -1,0 +1,32 @@
+﻿@model Hospital.UI.Models.PatientCardViewModel
+
+<div class="col-12 col-lg-9 order-lg-0 mt-1 bg-light rounded">
+    <h2 class="text-center">Patient Card:</h2>
+    <table class="table">
+        <tr>
+            <th scope="col">LastName</th>
+            <th scope="col">First name</th>
+        </tr>
+        <tr>
+            <td>@Model.Patient.LastName</td>
+            <td>@Model.Patient.FirstName</td>
+        </tr>
+    </table>
+    <h2 class="text-center">Diagnoses:</h2>
+    <table class="table">
+        <tr>
+            <th scope="col">Is Cured?</th>
+            <th scope="col">Diagnosis</th>
+            <th scope="col">Actions</th>
+        </tr>
+        @foreach (var diagnosis in Model.Diagnoses)
+        {
+            <tr>
+                <td>@diagnosis.IsCured</td>
+                <td>@diagnosis.DefinitiveDiagnosis</td>
+                <td>@Html.ActionLink("Details", "DiagnosisDetails", "Patient", new { Id = diagnosis.Id }, new { @class = "btn btn-secondary" })</td>
+            </tr>
+        }
+    </table>
+    @Html.ActionLink("Back", "Index", "Home", null, new { @class = "btn btn-secondary  mb-1" })
+</div>

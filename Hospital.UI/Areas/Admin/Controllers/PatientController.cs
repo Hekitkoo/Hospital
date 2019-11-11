@@ -114,7 +114,7 @@ namespace Hospital.UI.Areas.Admin.Controllers
             return RedirectToAction("Details","Patient", new {id = patientvm.Id});
         }
 
-        public ActionResult Details(int id)
+        public ActionResult Details(int? id)
         {
             var patient = _patientService.FindById(id).ProjectToSingleOrDefault<PatientViewModel>();
 

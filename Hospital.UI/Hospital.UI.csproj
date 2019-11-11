@@ -195,7 +195,9 @@
     <Compile Include="Areas\Admin\Controllers\DoctorController.cs" />
     <Compile Include="Areas\Admin\Controllers\NurseController.cs" />
     <Compile Include="Areas\Admin\Controllers\PatientController.cs" />
+    <Compile Include="Controllers\DoctorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\PatientController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -204,8 +206,11 @@
     <Compile Include="Areas\Admin\Models\CreateDoctorViewModel.cs" />
     <Compile Include="Areas\Admin\Models\CreatePatientViewModel.cs" />
     <Compile Include="Models\DetailsDoctorViewModel.cs" />
+    <Compile Include="Models\DiagnosisViewModel.cs" />
     <Compile Include="Models\DoctorViewModel.cs" />
     <Compile Include="Models\NurseViewModel.cs" />
+    <Compile Include="Models\PatientCardViewModel.cs" />
+    <Compile Include="Models\PresctiptionsViewModel.cs" />
     <Compile Include="Models\SpecialityViewModel.cs" />
     <Compile Include="Models\PatientViewModel.cs" />
     <Compile Include="Models\LoginViewModel.cs" />
@@ -311,6 +316,10 @@
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
     <Content Include="Views\Shared\_Menu.cshtml" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Doctor\Index.cshtml" />
+    <Content Include="Views\Patient\CardDetails.cshtml" />
+    <Content Include="Views\Patient\DiagnosisDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

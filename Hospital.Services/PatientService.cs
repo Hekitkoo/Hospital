@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
@@ -86,23 +85,87 @@ namespace Hospital.Services
 
         public Patient FindByName(string name)
         {
-            return _context.Patients.FirstOrDefault(p => p.UserName == name);
+            try
+            {
+                return _context.Patients.FirstOrDefault(p => p.UserName == name);
+            }
+            catch (Exception e)
+            {
+                _loggerService.Error($"{e}");
+                throw;
+            }
+           
         }
 
         public IQueryable<Patient> FindById(int? id)
         {
-            return _context.Patients.Where(p => p.Id == id);
+            try
+            {
+                return _context.Patients.Where(p => p.Id == id);
+            }
+            catch (Exception e)
+            {
+                _loggerService.Error($"{e}");
+                throw;
+            }
+           
         }
 
         public IQueryable<Patient> GetPatients()
         {
-            return _context.Patients.AsQueryable();
+            try
+            {
+                return _context.Patients;
+            }
+            catch (Exception e)
+            {
+                _loggerService.Error($"{e}");
+                throw;
+            }
+           
         }
 
         public void Update(Patient patient)
         {
-            _context.Entry(patient).State = EntityState.Modified;
-            _context.SaveChanges();
+            try
+            {
+                _context.Entry(patient).State = EntityState.Modified;
+                _context.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                _loggerService.Error($"{e}");
+                throw;
+            }
+
+        }
+
+        public IQueryable<PatientCard> FindCardByPatientId(int? id)
+        {
+            try
+            {
+                return from patientCard in _context.PatientCards
+                       where patientCard.Patient.Id == id
+                       select patientCard;
+            }
+            catch (Exception e)
+            {
+                _loggerService.Error($"{e}");
+                throw;
+            }
+        }
+
+        public IQueryable<Diagnosis> FindDiagnosisById(int? id)
+        {
+            try
+            {
+                return _context.Diagnoses.Where(d => d.Id == id);
+            }
+            catch (Exception e)
+            {
+                _loggerService.Error($"{e}");
+                throw;
+            }
         }
     }
 }
