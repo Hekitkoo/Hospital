@@ -43,7 +43,7 @@ namespace Hospital.DAL
             {
                 Description = "It's Example of prescriptions description",
                 IsDone = false,
-                PrescriptionType = new PrescriptionType { Name = "Test" }
+                PrescriptionType = new PrescriptionType { Name = "NurseType" }
             };
             var diagnosis = new Diagnosis
             {

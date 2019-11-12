@@ -1,32 +1,42 @@
 ﻿@model Hospital.UI.Models.DiagnosisViewModel
 
-    <div class="col-12 col-lg-9 order-lg-0 mt-1 bg-light rounded">
-        <h2 class="text-center">Diagnosis:</h2>
-        <table class="table">
+<div class="col-12 col-lg-9 order-lg-0 mt-1 bg-light rounded">
+    <h2 class="text-center">Diagnosis:</h2>
+    @if (User.IsInRole("doctor"))
+    {
+        @Html.ActionLink("Add Prescription", "CreatePrescription", "Doctor", new { Id = @Model.Id }, new { @class = "btn btn-secondary  mb-1" })
+    }
+    <table class="table">
+        <tr>
+            <th scope="col">Definitive Diagnosis</th>
+            <th scope="col">Is Cured</th>
+        </tr>
+        <tr>
+            <td>@Model.DefinitiveDiagnosis</td>
+            <td>@Model.IsCured</td>
+        </tr>
+    </table>
+    <h2 class="text-center">Prescriptions:</h2>
+    <table class="table">
+        <tr>
+            <th scope="col">Description</th>
+            <th scope="col">Is Done</th>
+            <th scope="col">Actions</th>
+        </tr>
+        @foreach (var prescription in Model.Prescriptions)
+        {
             <tr>
-                <th scope="col">Definitive Diagnosis</th>
-                <th scope="col">Is Cured</th>
-            </tr>
-            <tr>
-                <td>@Model.DefinitiveDiagnosis</td>
-                <td>@Model.IsCured</td>
-            </tr>
-        </table>
-        <h2 class="text-center">Prescriptions:</h2>
-        <table class="table">
-            <tr>
-                <th scope="col">Description</th>
-                <th scope="col">Is Done</th>
-                <th scope="col">Actions</th>
-            </tr>
-            @foreach (var prescription in Model.Prescriptions)
-            {
-                <tr>
-                    <td>@prescription.Description</td>
-                    <td>@prescription.IsDone</td>
-                    <td>@Html.ActionLink("Details", "PrescriptionDetails", "Patient", new { Id = prescription.Id }, new { @class = "btn btn-secondary" })</td>
-                </tr>
-            }
-        </table>
-        @Html.ActionLink("Back", "Index", "Home", null, new { @class = "btn btn-secondary  mb-1" })
-    </div>
+                <td>@prescription.Description</td>
+                <td>@prescription.IsDone</td>
+                <td>
+                    @Html.ActionLink("Details", "PrescriptionDetails", "Patient", new { Id = prescription.Id }, new { @class = "btn btn-secondary" })
+                @if (User.IsInRole("doctor"))
+                {
+                    @Html.ActionLink("Change Diagnosis", "ChangePrescription", "Doctor", new { Id = prescription.Id }, new { @class = "btn btn-secondary" })
+                }
+            </td>
+        </tr>
+    }
+    </table>
+    @Html.ActionLink("Back", "CardDetails", "Patient", new {id = @Model.PatientCardId}, new { @class = "btn btn-secondary  mb-1" })
+</div>

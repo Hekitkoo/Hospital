@@ -35,6 +35,8 @@ namespace Hospital.Services
         {
             try
             {
+                prescription.PrescriptionType =
+                    _context.PrescriptionTypes.SingleOrDefault(pt => pt.Id == prescription.PrescriptionTypeId);
                 _context.Entry(prescription).State = EntityState.Modified;
                 _context.SaveChanges();
             }
@@ -51,6 +53,7 @@ namespace Hospital.Services
             try
             {
                 diagnosis.PatientCard = _context.PatientCards.SingleOrDefault(pc => pc.Id == diagnosis.PatientCardId);
+
                 _context.Diagnoses.Add(diagnosis);
                 _context.SaveChanges();
 
@@ -67,6 +70,8 @@ namespace Hospital.Services
             try
             {
                 prescription.Diagnosis = _context.Diagnoses.SingleOrDefault(d => d.Id == prescription.DiagnosisId);
+                prescription.PrescriptionType =
+                    _context.PrescriptionTypes.SingleOrDefault(pt => pt.Id == prescription.PrescriptionTypeId);
                 _context.Prescriptions.Add(prescription);
                 _context.SaveChanges();
 
@@ -76,6 +81,20 @@ namespace Hospital.Services
                 _loggerService.Error($"{e}");
                 throw;
             }
+        }
+
+        public IQueryable<PrescriptionType> GetPrescriptionTypes()
+        {
+            try
+            {
+                return _context.PrescriptionTypes;
+            }
+            catch (Exception e)
+            {
+                _loggerService.Error($"{e}");
+                throw;
+            }
+           
         }
 
         public IQueryable<PatientCard> FindCardById(int? id)

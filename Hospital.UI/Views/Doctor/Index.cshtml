@@ -26,9 +26,9 @@
             <tr>
                 <td>@patient.LastName</td>
                 <td>@patient.FirstName</td>
-                <td>@Html.ActionLink("Details", "CardDetails", "Patient", new { Id = patient.Id }, new { @class = "btn btn-secondary" })</td>
+                <td>@Html.ActionLink("Details", "CardDetails", "Patient", new { Id = @patient.PatientCardId }, new { @class = "btn btn-secondary" })</td>
             </tr>
         }
     </table>
-    @Html.ActionLink("Back", "Index", "Home", null, new { @class = "btn btn-secondary  mb-1" })
+    @Html.ActionLink("Back to Home", "Index", "Home", null, new { @class = "btn btn-secondary  mb-1" })
 </div>

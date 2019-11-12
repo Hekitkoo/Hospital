@@ -6,6 +6,7 @@
         public bool IsDone { get; set; }
         public int? DiagnosisId { get; set; }
         public virtual Diagnosis Diagnosis { get; set; }
+        public int PrescriptionTypeId { get; set; }
         public virtual PrescriptionType PrescriptionType { get; set; }
     }
 }

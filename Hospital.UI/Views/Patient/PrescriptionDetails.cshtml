@@ -1,4 +1,4 @@
-﻿@model Hospital.UI.Models.PresctiptionViewModel
+﻿@model Hospital.UI.Models.PrescriptionViewModel
 
 <div class="col-12 col-lg-9 order-lg-0 mt-1 bg-light rounded">
     <h2 class="text-center">Prescription:</h2>
@@ -12,5 +12,5 @@
             <td>@Model.IsDone</td>
         </tr>
     </table>
-    @Html.ActionLink("Back", "Index", "Home", null, new { @class = "btn btn-secondary  mb-1" })
+    @Html.ActionLink("Back", "DiagnosisDetails", "Patient", new {id = @Model.DiagnosisId}, new { @class = "btn btn-secondary  mb-1" })
 </div>

@@ -11,11 +11,14 @@ namespace Hospital.UI
         private static AutoMapperConfig _profile;
         private AutoMapperConfig()
         {
-            CreateMap<Patient, PatientViewModel>().ForMember(pvm => pvm.PatientCardId, conf => conf.MapFrom(p => p.PatientCard.Id));
+            CreateMap<Patient, PatientViewModel>()
+                .ForMember(pvm => pvm.PatientCardId, conf => conf
+                    .MapFrom(p => p.PatientCard.Id));
             CreateMap<Patient, CreatePatientViewModel>().ReverseMap();
             CreateMap<Patient, ChangeDoctorViewModel>();
-            CreateMap<Doctor, DoctorViewModel>().ForMember(dv => dv.NumberOfPatients,
-                conf => conf.MapFrom(d => d.Patients.Count()));
+            CreateMap<Doctor, DoctorViewModel>()
+                .ForMember(dv => dv.NumberOfPatients,conf => conf
+                    .MapFrom(d => d.Patients.Count()));
             CreateMap<Doctor, CreateDoctorViewModel>().ReverseMap();
             CreateMap<Doctor, DetailsDoctorViewModel>();
             CreateMap<Speciality, SpecialityViewModel>().ReverseMap();
@@ -24,7 +27,9 @@ namespace Hospital.UI
             CreateMap<CreateNurseViewModel, User>().ReverseMap();
             CreateMap<PatientCard, PatientCardViewModel>();
             CreateMap<Diagnosis, DiagnosisViewModel>();
-            CreateMap<Prescription, PresctiptionViewModel>();
+            CreateMap<Prescription, PrescriptionViewModel>();
+            CreateMap<CreateDiagnosisViewModel, Diagnosis>().ReverseMap();
+            CreateMap<CreatePrescriptionViewModel, Prescription>().ReverseMap();
         }
 
         public static AutoMapperConfig Initialize()

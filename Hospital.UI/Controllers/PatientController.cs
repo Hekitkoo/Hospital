@@ -20,7 +20,7 @@ namespace Hospital.UI.Controllers
             _patientService = patientService;
             _patientCardService = patientCardService;
         }
-        // GET: Patient
+        [Authorize(Roles = "patient")]
         public ActionResult Index()
         {
             int id = Convert.ToInt32(User.Identity.GetUserId());
@@ -52,7 +52,7 @@ namespace Hospital.UI.Controllers
         }
         public ActionResult PrescriptionDetails(int? id)
         {
-            var patientPrescription = _patientCardService.FindPrescriptionById(id).ProjectToSingleOrDefault<PresctiptionViewModel>();
+            var patientPrescription = _patientCardService.FindPrescriptionById(id).ProjectToSingleOrDefault<PrescriptionViewModel>();
             if (patientPrescription != null)
             {
                 return View(patientPrescription);

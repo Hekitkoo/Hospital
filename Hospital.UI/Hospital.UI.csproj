@@ -198,6 +198,7 @@
     <Compile Include="Controllers\DoctorController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\NurseController.cs" />
     <Compile Include="Controllers\PatientController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -207,12 +208,13 @@
     <Compile Include="Areas\Admin\Models\CreateDoctorViewModel.cs" />
     <Compile Include="Areas\Admin\Models\CreatePatientViewModel.cs" />
     <Compile Include="Models\CreateDiagnosisViewModel.cs" />
+    <Compile Include="Models\CreatePrescriptionViewModel.cs" />
     <Compile Include="Models\DetailsDoctorViewModel.cs" />
     <Compile Include="Models\DiagnosisViewModel.cs" />
     <Compile Include="Models\DoctorViewModel.cs" />
     <Compile Include="Models\NurseViewModel.cs" />
     <Compile Include="Models\PatientCardViewModel.cs" />
-    <Compile Include="Models\PresctiptionViewModel.cs" />
+    <Compile Include="Models\PrescriptionViewModel.cs" />
     <Compile Include="Models\SpecialityViewModel.cs" />
     <Compile Include="Models\PatientViewModel.cs" />
     <Compile Include="Models\LoginViewModel.cs" />
@@ -325,12 +327,15 @@
     <Content Include="Views\Error\PageNotFound.cshtml" />
     <Content Include="Views\Patient\PrescriptionDetails.cshtml" />
     <Content Include="Views\Patient\Index.cshtml" />
-    <Content Include="Views\Doctor\CreateDaignosis.cshtml" />
+    <Content Include="Views\Doctor\CreateDiagnosis.cshtml" />
     <Content Include="Views\Doctor\ChangeDiagnosis.cshtml" />
+    <Content Include="Views\Doctor\CreatePrescription.cshtml" />
+    <Content Include="Views\Doctor\ChangePrescription.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Views\Shared\" />
+    <Folder Include="Views\Nurse\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

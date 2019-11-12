@@ -85,5 +85,10 @@ namespace Hospital.Services
             }    
            
         }
+
+        public IQueryable<Prescription> GetAllNursesJob(int id)
+        {
+            return _context.Prescriptions.Where(p => p.PrescriptionType.Name == "NurseType");
+        }
     }
 }

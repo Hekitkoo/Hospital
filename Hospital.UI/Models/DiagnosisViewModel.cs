@@ -6,6 +6,7 @@ namespace Hospital.UI.Models
     {
         public bool IsCured { get; set; }
         public string DefinitiveDiagnosis { get; set; }
-        public ICollection<PresctiptionViewModel> Prescriptions { get; set; }
+        public ICollection<PrescriptionViewModel> Prescriptions { get; set; }
+        public int? PatientCardId { get; set; }
     }
 }

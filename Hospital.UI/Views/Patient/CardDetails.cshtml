@@ -3,7 +3,7 @@
 <div class="col-12 col-lg-9 order-lg-0 mt-1 bg-light rounded">
     <h2 class="text-center">@Model.Patient.LastName @Model.Patient.FirstName Card:</h2>
     @if (User.IsInRole("doctor")){
-    @Html.ActionLink("Add Diagnosis", "CreateDaignosis", "Doctor", null, new { @class = "btn btn-secondary  mb-1" })
+    @Html.ActionLink("Add Diagnosis", "CreateDiagnosis", "Doctor", new { Id = @Model.Id }, new { @class = "btn btn-secondary  mb-1" })
     }
     <h2 class="text-center">Diagnoses:</h2>
     <table class="table">
@@ -18,9 +18,9 @@
                 <td>@diagnosis.DefinitiveDiagnosis</td>
                 <td>@diagnosis.IsCured</td>
                 <td>
-                    @Html.ActionLink("Details", "DiagnosisDetails", "Patient", new { Id = diagnosis.Id }, new { @class = "btn btn-secondary" })
+                    @Html.ActionLink("Details", "DiagnosisDetails", "Patient", new { Id = @diagnosis.Id }, new { @class = "btn btn-secondary" })
                     @if (User.IsInRole("doctor")){
-                    @Html.ActionLink("ChangeDiagnosis", "ChangeDiagnosis", "Doctor", new { Id = diagnosis.Id }, new { @class = "btn btn-secondary" })
+                    @Html.ActionLink("Change Diagnosis", "ChangeDiagnosis", "Doctor", new { Id = diagnosis.Id }, new { @class = "btn btn-secondary" })
                     }
                 </td>
 

@@ -1,0 +1,31 @@
+﻿@model Hospital.UI.Models.CreatePrescriptionViewModel
+
+<div class="col-12 col-lg-9 order-lg-0 mt-1 bg-light rounded">
+    @using (Html.BeginForm())
+    {
+        <div class=" form-group col-md-10 ">
+            @Html.HiddenFor(m => m.DiagnosisId)
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.LabelFor(m => m.Description)
+            @Html.EditorFor(m => m.Description, new { htmlAttributes = new { placeholder = @Html.DisplayNameFor(m => m.Description), @class = "form-control text-center" } })
+            @Html.ValidationMessageFor(m => m.Description, "", new { @class = "text-danger" })
+        </div>
+        <div class=" form-group col-md-1 ">
+            @Html.LabelFor(m => m.IsDone)
+            @Html.EditorFor(m => m.IsDone, new { htmlAttributes = new { placeholder = @Html.DisplayNameFor(m => m.IsDone), @class = "form-control text-center" } })
+            @Html.ValidationMessageFor(m => m.IsDone, "", new { @class = "text-danger" })
+        </div>
+        <div class=" form-group col-md-10 ">
+            <div class=" form-group col-md-10 ">
+                @Html.LabelFor(m => m.PrescriptionTypeId)
+                @Html.DropDownListFor(m => m.PrescriptionTypeId, Model.PrescriptionTypes, new { @class = "form-control text-center" })
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-10">
+                <input type="submit" value="Submit" class="btn btn-secondary" />
+            </div>
+        </div>
+    }
+    @Html.ActionLink("Back", "CardDetails", "Patient", new { Id = @Model.DiagnosisId }, new { @class = "btn btn-secondary mb-1" })
+</div>

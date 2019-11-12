@@ -13,5 +13,6 @@ namespace Hospital.Service.Interfaces
         IQueryable<Prescription> FindPrescriptionById(int? id);
         void ChangePrescription(Prescription prescription);
         void CreatePrescription(Prescription prescription);
+        IQueryable<PrescriptionType> GetPrescriptionTypes();
     }
 }
