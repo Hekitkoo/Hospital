@@ -98,7 +98,7 @@
     <Compile Include="PatientService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RoleService.cs" />
-    <Compile Include="ServiceLayer.cs" />
+    <Compile Include="ServiceLayerModule.cs" />
     <Compile Include="SigninService.cs" />
     <Compile Include="SpecialityService.cs" />
     <Compile Include="UserService.cs" />

@@ -5,7 +5,7 @@ using Microsoft.AspNet.Identity.Owin;
 
 namespace Hospital.Services
 {
-    public class ServiceLayer : Module
+    public class ServiceLayerModule : Module
     {
         protected override void Load(ContainerBuilder builder)
         {

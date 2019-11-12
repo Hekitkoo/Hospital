@@ -1,17 +1,23 @@
-﻿
-@{
-    Layout = null;
-}
+﻿@model ICollection<Hospital.UI.Models.PrescriptionViewModel>
 
-<!DOCTYPE html>
-
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Prescriptions</title>
-</head>
-<body>
-    <div> 
-    </div>
-</body>
-</html>
+<div class="col-12 col-lg-9 order-lg-0 mt-1 bg-light rounded">
+    <h2 class="text-center">Prescriptions:</h2>
+    <table class="table">
+        <tr>
+            <th scope="col">Description</th>
+            <th scope="col">Is Done</th>
+            <th scope="col">Actions</th>
+        </tr>
+        @foreach (var prescription in @Model)
+        {
+            <tr>
+                <td>@prescription.Description</td>
+                <td>@prescription.IsDone</td>
+                <td>
+                    @Html.ActionLink("Change Status", "Prescriptions","Nurse", new { id = prescription.Id }, new {@class = "btn btn-secondary  mb-1"})
+                </td>
+            </tr>
+        }
+    </table>
+    @Html.ActionLink("Back to Home", "Index", "Home", null, new { @class = "btn btn-secondary  mb-1" })
+</div>

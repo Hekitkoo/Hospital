@@ -9,6 +9,7 @@ namespace Hospital.Service.Interfaces
         IQueryable<User> GetNurses();
         Task Create(User user);
         IQueryable<User> FindById(int? id);
-        IQueryable<Prescription> GetPrescriptions(int id);
+        IQueryable<Prescription> GetPrescriptions();
+        void ChangePrescriptionStatus(int? id);
     }
 }

@@ -13,7 +13,7 @@ namespace Hospital.UI
             var builder = new ContainerBuilder();
             builder.RegisterControllers(typeof(MvcApplication).Assembly);
             builder.RegisterModule(new DAL.DataLayer());
-            builder.RegisterModule(new Services.ServiceLayer());
+            builder.RegisterModule(new Services.ServiceLayerModule());
 
             builder.Register(ctx => new MapperConfiguration(cfg =>
             {

@@ -27,8 +27,18 @@ namespace Hospital.UI.Controllers
 
         public ActionResult Prescriptions()
         {
-            int id = Convert.ToInt32(User.Identity.GetUserId());
-            var prescriptions = _nurseService.GetPrescriptions(id).ProjectToQueryable<PrescriptionViewModel>();
+            var prescriptions = _nurseService.GetPrescriptions().ProjectToList<PrescriptionViewModel>();
+            if (prescriptions != null)
+            {
+                return View(prescriptions);
+            }
+            return HttpNotFound();
+        }
+        [HttpPost]
+        public ActionResult Prescriptions(int? id)
+        {
+            _nurseService.ChangePrescriptionStatus(id);
+            var prescriptions = _nurseService.GetPrescriptions().ProjectToList<PrescriptionViewModel>();
             if (prescriptions != null)
             {
                 return View(prescriptions);

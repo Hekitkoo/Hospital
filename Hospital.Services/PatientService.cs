@@ -43,8 +43,12 @@ namespace Hospital.Services
         {
             try
             {
-                var userByName = _userService.FindByNameAsync(patient.UserName).Result;
-                var userByEmail = _userService.FindByEmailAsync(patient.Email).Result;
+                var userByName = _userService.FindByNameAsync(patient.UserName)
+                    .GetAwaiter()
+                    .GetResult(); 
+                var userByEmail = _userService.FindByEmailAsync(patient.Email)
+                    .GetAwaiter()
+                    .GetResult();
 
                 return userByName == null && userByEmail == null;
             }

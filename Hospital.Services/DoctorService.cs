@@ -68,15 +68,19 @@ namespace Hospital.Services
         {
             try
             {
-                var userByName = _userService.FindByNameAsync(doctor.UserName).Result;
-            var userByEmail = _userService.FindByEmailAsync(doctor.Email).Result;
+                var userByName = _userService.FindByNameAsync(doctor.UserName)
+                    .GetAwaiter()
+                    .GetResult();
+                var userByEmail = _userService.FindByEmailAsync(doctor.Email)
+                    .GetAwaiter()
+                    .GetResult();
 
-            if (userByName != null || userByEmail != null)
-            {
-                return false;
-            }
+                if (userByName != null || userByEmail != null)
+                {
+                    return false;
+                }
 
-            return true;
+                return true;
             }
             catch (Exception e)
             {

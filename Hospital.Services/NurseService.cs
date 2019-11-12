@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
 using Hospital.Core.Models;
@@ -24,8 +25,12 @@ namespace Hospital.Services
         {
             try
             {
-                var userByName = _userService.FindByNameAsync(nurse.UserName).Result;
-                var userByEmail = _userService.FindByEmailAsync(nurse.Email).Result;
+                var userByName = _userService.FindByNameAsync(nurse.UserName)
+                    .GetAwaiter()
+                    .GetResult();
+                var userByEmail = _userService.FindByEmailAsync(nurse.Email)
+                    .GetAwaiter()
+                    .GetResult();
 
                 if (userByName != null || userByEmail != null)
                 {
@@ -46,8 +51,8 @@ namespace Hospital.Services
             try
             {
                 return from nurse in _context.Users
-                where nurse.Roles.Any(r => r.Name == "nurse")
-                select nurse;
+                       where nurse.Roles.Any(r => r.Name == "nurse")
+                       select nurse;
             }
             catch (Exception e)
             {
@@ -82,13 +87,38 @@ namespace Hospital.Services
             {
                 _loggerService.Error($"{e}");
                 throw;
-            }    
-           
+            }
+
         }
 
-        public IQueryable<Prescription> GetPrescriptions(int id)
+        public IQueryable<Prescription> GetPrescriptions()
         {
-            return _context.Prescriptions.Where(p => p.PrescriptionType.Name == "NurseType");
+            try
+            {
+                return _context.Prescriptions.Where(p => p.PrescriptionType.Name == "NurseType");
+            }
+            catch (Exception e)
+            {
+                _loggerService.Error($"{e}");
+                throw;
+            }
+        }
+
+        public void ChangePrescriptionStatus(int? id)
+        {
+            var prescription = _context.Prescriptions.SingleOrDefault(p => p.PrescriptionType.Id == id);
+            try
+            {
+                if (prescription == null) return;
+                prescription.IsDone = !prescription.IsDone;
+                _context.Entry(prescription).State = EntityState.Modified;
+                _context.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                _loggerService.Error($"{e}");
+                throw;
+            }
         }
     }
 }
