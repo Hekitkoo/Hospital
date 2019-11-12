@@ -19,7 +19,7 @@
             @if (User.IsInRole("nurse"))
             {
                 <li class="nav-item">
-                    @Html.ActionLink("Procedures", "Procedures", "Nurse", null, new { @class = "nav-link" })
+                    @Html.ActionLink("Procedures", "Prescriptions", "Nurse", null, new { @class = "nav-link" })
                 </li>
             }
             @if (User.IsInRole("admin"))

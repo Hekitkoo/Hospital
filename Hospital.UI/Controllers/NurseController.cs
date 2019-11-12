@@ -2,6 +2,7 @@
 using System.Web.Mvc;
 using AutoMapper;
 using Hospital.Service.Interfaces;
+using Hospital.UI.Models;
 using Microsoft.AspNet.Identity;
 
 namespace Hospital.UI.Controllers
@@ -21,13 +22,17 @@ namespace Hospital.UI.Controllers
         }
         public ActionResult Index()
         {
+            return View();
+        }
+
+        public ActionResult Prescriptions()
+        {
             int id = Convert.ToInt32(User.Identity.GetUserId());
-            var prescriptions = _nurseService.GetAllNursesJob(id);
+            var prescriptions = _nurseService.GetPrescriptions(id).ProjectToQueryable<PrescriptionViewModel>();
             if (prescriptions != null)
             {
                 return View(prescriptions);
             }
-
             return HttpNotFound();
         }
     }

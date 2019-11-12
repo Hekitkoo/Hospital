@@ -331,11 +331,12 @@
     <Content Include="Views\Doctor\ChangeDiagnosis.cshtml" />
     <Content Include="Views\Doctor\CreatePrescription.cshtml" />
     <Content Include="Views\Doctor\ChangePrescription.cshtml" />
+    <Content Include="Views\Nurse\Index.cshtml" />
+    <Content Include="Views\Nurse\Prescriptions.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Views\Shared\" />
-    <Folder Include="Views\Nurse\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
